@@ -8,12 +8,16 @@ const usersRoutes = require('./routes/users');
 const votesRoutes = require('./routes/votes');
 
 const app = express();
-const PORT = 3001;
+const PORT = process.env.PORT || 3001;
 
 // Middleware
 app.use(cors({
   origin: (origin, callback) => {
-    if (!origin || origin.startsWith('http://localhost')) {
+    const allowed = [
+      'http://localhost:5173',
+      process.env.FRONTEND_URL,
+    ].filter(Boolean);
+    if (!origin || allowed.some(url => origin.startsWith(url))) {
       callback(null, true);
     } else {
       callback(new Error('Not allowed by CORS'));
