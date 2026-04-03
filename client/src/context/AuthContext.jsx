@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from 'react';
+import { createContext, useContext, useState, useEffect } from 'react';
 
 const AuthContext = createContext(null);
 
@@ -23,6 +23,12 @@ export function AuthProvider({ children }) {
     localStorage.removeItem('user');
     setUser(null);
   };
+
+  useEffect(() => {
+    const handleLogout = () => setUser(null);
+    window.addEventListener('auth:logout', handleLogout);
+    return () => window.removeEventListener('auth:logout', handleLogout);
+  }, []);
 
   const isAuthenticated = !!user;
 
