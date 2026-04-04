@@ -84,7 +84,7 @@ const CATEGORIES = [
 
 export default function Home() {
   const navigate = useNavigate();
-  const [expanded, setExpanded] = useState('Redstone');
+  const [expanded, setExpanded] = useState('');
 
   return (
     <div style={{ minHeight: '100vh', paddingBottom: '80px' }}>
@@ -240,7 +240,8 @@ export default function Home() {
                   position: 'relative',
                   cursor: 'pointer',
                 }}
-                onClick={() => setExpanded(isOpen ? '' : cat.name)}
+                onMouseEnter={() => setExpanded(cat.name)}
+                onMouseLeave={() => setExpanded('')}
               >
                 {/* Accent glow — always present, more visible when open */}
                 <div style={{
