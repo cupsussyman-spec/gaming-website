@@ -254,13 +254,15 @@ export default function Home() {
               >
                 {/* Background image */}
                 <div style={{
-                  position: 'absolute', inset: 0,
+                  position: 'absolute',
+                  inset: '-6px',
                   backgroundImage: cat.bgImage
                     ? `url('${cat.bgImage}')`
                     : cat.fallbackBg,
                   backgroundSize: 'cover',
                   backgroundPosition: 'center',
-                  opacity: isOpen ? 0.6 : 0.3,
+                  opacity: isOpen ? 0.65 : 0.35,
+                  filter: 'blur(5px)',
                   transition: 'opacity 0.55s ease',
                   pointerEvents: 'none',
                 }} />
