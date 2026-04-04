@@ -235,7 +235,7 @@ export default function Home() {
                   borderRadius: '12px',
                   border: isOpen ? `1px solid ${cat.color}45` : '1px solid rgba(255,255,255,0.08)',
                   overflow: 'hidden',
-                  transition: 'border-color 0.3s',
+                  transition: 'border-color 0.55s ease',
                   background: cat.cardBg,
                   position: 'relative',
                   cursor: 'pointer',
@@ -243,12 +243,21 @@ export default function Home() {
                 onMouseEnter={() => setExpanded(cat.name)}
                 onMouseLeave={() => setExpanded('')}
               >
+                {/* Left color bar */}
+                <div style={{
+                  position: 'absolute', left: 0, top: '12px', bottom: '12px',
+                  width: '3px', borderRadius: '0 3px 3px 0',
+                  background: cat.color,
+                  opacity: isOpen ? 0.9 : 0.25,
+                  transition: 'opacity 0.55s ease',
+                }} />
+
                 {/* Accent glow — always present, more visible when open */}
                 <div style={{
                   position: 'absolute', inset: 0,
                   backgroundImage: cat.cardAccent,
                   opacity: isOpen ? 1 : 0.4,
-                  transition: 'opacity 0.4s',
+                  transition: 'opacity 0.55s ease',
                   pointerEvents: 'none',
                 }} />
 
@@ -295,13 +304,13 @@ export default function Home() {
                 <div style={{
                   maxHeight: isOpen ? '220px' : '0',
                   overflow: 'hidden',
-                  transition: 'max-height 0.4s cubic-bezier(0.4,0,0.2,1)',
+                  transition: 'max-height 0.55s cubic-bezier(0.25,0.1,0.25,1)',
                 }}>
                   <div style={{
                     padding: '0 20px 20px 78px',
                     opacity: isOpen ? 1 : 0,
                     transform: isOpen ? 'translateY(0)' : 'translateY(-8px)',
-                    transition: 'opacity 0.3s ease 0.1s, transform 0.3s ease 0.1s',
+                    transition: 'opacity 0.45s ease 0.15s, transform 0.45s ease 0.15s',
                     position: 'relative', zIndex: 1,
                   }}>
                     <p style={{
