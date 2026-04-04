@@ -204,7 +204,7 @@ export default function Home() {
           // SELECT_CATEGORY
         </p>
 
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
           {CATEGORIES.map((cat) => {
             const isOpen = expanded === cat.name;
             return (
