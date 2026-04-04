@@ -9,76 +9,55 @@ const CATEGORIES = [
     color: '#ef4444',
     icon: '⚡',
     desc: 'Circuits & Contraptions',
-    // Dark left, warm red glow on the right (redstone city)
-    cardBg: `
-      linear-gradient(to right,
-        rgba(8,5,10,0.98) 0%,
-        rgba(8,5,10,0.92) 35%,
-        rgba(20,5,5,0.75) 60%,
-        rgba(40,8,5,0.55) 80%,
-        rgba(60,12,5,0.45) 100%
-      )`,
-    cardAccent: `radial-gradient(ellipse at 85% 50%, rgba(200,30,10,0.55) 0%, rgba(120,15,5,0.3) 40%, transparent 70%)`,
+    blurb: 'Master the art of redstone engineering. From simple doors to complex computing machines.',
+    bgImage: '/cat-redstone.png',
+    // overlay: dark idle → lighter on hover (handled inline)
+    idleOverlay: 'rgba(6,3,8,0.88)',
+    hoverOverlay: 'rgba(6,3,8,0.55)',
   },
   {
     name: 'Combat',
     color: '#8b5cf6',
     icon: '⚔',
     desc: 'PvP & PvE Tactics',
-    cardBg: `
-      linear-gradient(to right,
-        rgba(8,5,10,0.98) 0%,
-        rgba(8,5,10,0.92) 35%,
-        rgba(5,10,20,0.75) 60%,
-        rgba(5,15,30,0.55) 80%,
-        rgba(5,20,40,0.45) 100%
-      )`,
-    cardAccent: `radial-gradient(ellipse at 85% 50%, rgba(0,200,200,0.35) 0%, rgba(0,100,130,0.2) 40%, transparent 70%)`,
+    blurb: 'Dominate every encounter. PvP strategies, mob tactics, and gear optimization.',
+    bgImage: null,
+    idleOverlay: 'rgba(6,3,8,0.88)',
+    hoverOverlay: 'rgba(6,3,8,0.6)',
+    fallbackBg: 'radial-gradient(ellipse at 75% 50%, rgba(0,150,150,0.25) 0%, rgba(5,10,20,0.95) 60%)',
   },
   {
     name: 'Building',
     color: '#22c55e',
     icon: '🏗',
     desc: 'Architecture & Design',
-    cardBg: `
-      linear-gradient(to right,
-        rgba(8,5,10,0.98) 0%,
-        rgba(8,5,10,0.92) 35%,
-        rgba(5,15,10,0.75) 60%,
-        rgba(5,25,12,0.55) 80%,
-        rgba(5,35,15,0.45) 100%
-      )`,
-    cardAccent: `radial-gradient(ellipse at 85% 50%, rgba(20,160,60,0.38) 0%, rgba(10,90,30,0.22) 40%, transparent 70%)`,
+    blurb: 'Create stunning structures. Architecture tips, building techniques, and design inspiration.',
+    bgImage: null,
+    idleOverlay: 'rgba(6,3,8,0.88)',
+    hoverOverlay: 'rgba(6,3,8,0.6)',
+    fallbackBg: 'radial-gradient(ellipse at 75% 50%, rgba(20,140,50,0.28) 0%, rgba(5,12,8,0.95) 60%)',
   },
   {
     name: 'Farming',
     color: '#84cc16',
     icon: '🌾',
     desc: 'Automation & Resources',
-    cardBg: `
-      linear-gradient(to right,
-        rgba(8,5,10,0.98) 0%,
-        rgba(8,5,10,0.92) 35%,
-        rgba(10,14,5,0.75) 60%,
-        rgba(15,20,5,0.55) 80%,
-        rgba(20,30,5,0.45) 100%
-      )`,
-    cardAccent: `radial-gradient(ellipse at 85% 50%, rgba(110,190,10,0.38) 0%, rgba(60,110,5,0.22) 40%, transparent 70%)`,
+    blurb: 'Automate your resources. Efficient farms, crop mechanics, and mob grinding setups.',
+    bgImage: null,
+    idleOverlay: 'rgba(6,3,8,0.88)',
+    hoverOverlay: 'rgba(6,3,8,0.6)',
+    fallbackBg: 'radial-gradient(ellipse at 75% 50%, rgba(95,170,5,0.28) 0%, rgba(8,12,3,0.95) 60%)',
   },
   {
     name: 'Survival',
     color: '#f97316',
     icon: '🧭',
     desc: 'Exploration & Strategy',
-    cardBg: `
-      linear-gradient(to right,
-        rgba(8,5,10,0.98) 0%,
-        rgba(8,5,10,0.92) 35%,
-        rgba(20,10,5,0.75) 60%,
-        rgba(35,15,5,0.55) 80%,
-        rgba(50,20,5,0.45) 100%
-      )`,
-    cardAccent: `radial-gradient(ellipse at 85% 50%, rgba(200,90,5,0.42) 0%, rgba(110,45,5,0.24) 40%, transparent 70%)`,
+    blurb: 'Explore and survive. Navigation, resource gathering, and base setup strategies.',
+    bgImage: null,
+    idleOverlay: 'rgba(6,3,8,0.88)',
+    hoverOverlay: 'rgba(6,3,8,0.6)',
+    fallbackBg: 'radial-gradient(ellipse at 75% 50%, rgba(180,80,5,0.28) 0%, rgba(12,6,3,0.95) 60%)',
   },
 ];
 
@@ -233,16 +212,40 @@ export default function Home() {
                 key={cat.name}
                 style={{
                   borderRadius: '12px',
-                  border: isOpen ? `1px solid ${cat.color}45` : '1px solid rgba(255,255,255,0.08)',
+                  border: isOpen ? `1px solid ${cat.color}50` : '1px solid rgba(255,255,255,0.07)',
                   overflow: 'hidden',
                   transition: 'border-color 0.55s ease',
-                  background: cat.cardBg,
                   position: 'relative',
                   cursor: 'pointer',
+                  /* Background: image (if any) or fallback gradient */
+                  background: cat.bgImage ? '#080508' : (cat.fallbackBg || '#080508'),
+                  backgroundSize: 'cover',
+                  backgroundPosition: 'center',
                 }}
                 onMouseEnter={() => setExpanded(cat.name)}
                 onMouseLeave={() => setExpanded('')}
               >
+                {/* Actual background image (if provided) */}
+                {cat.bgImage && (
+                  <div style={{
+                    position: 'absolute', inset: 0,
+                    backgroundImage: `url('${cat.bgImage}')`,
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center',
+                    opacity: isOpen ? 0.55 : 0.12,
+                    transition: 'opacity 0.55s ease',
+                    pointerEvents: 'none',
+                  }} />
+                )}
+
+                {/* Dark overlay — lifts on hover */}
+                <div style={{
+                  position: 'absolute', inset: 0,
+                  background: isOpen ? cat.hoverOverlay : cat.idleOverlay,
+                  transition: 'background 0.55s ease',
+                  pointerEvents: 'none',
+                }} />
+
                 {/* Left color bar */}
                 <div style={{
                   position: 'absolute', left: 0, top: '12px', bottom: '12px',
@@ -250,15 +253,6 @@ export default function Home() {
                   background: cat.color,
                   opacity: isOpen ? 0.9 : 0.25,
                   transition: 'opacity 0.55s ease',
-                }} />
-
-                {/* Accent glow — always present, more visible when open */}
-                <div style={{
-                  position: 'absolute', inset: 0,
-                  backgroundImage: cat.cardAccent,
-                  opacity: isOpen ? 1 : 0.4,
-                  transition: 'opacity 0.55s ease',
-                  pointerEvents: 'none',
                 }} />
 
                 {/* Header row */}
