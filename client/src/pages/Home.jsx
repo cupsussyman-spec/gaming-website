@@ -1,5 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 
+const WISDOM_COLORS = ['#ef4444', '#ec4899', '#a855f7', '#8b5cf6', '#84cc16', '#22c55e'];
+
 const CATEGORIES = [
   {
     name: 'Redstone',
@@ -85,11 +87,127 @@ export default function Home() {
   return (
     <div style={{ minHeight: '100vh', paddingBottom: '80px' }}>
 
+      {/* ── Hero ─────────────────────────────────────── */}
+      <section style={{
+        minHeight: '100vh',
+        position: 'relative',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        textAlign: 'center',
+        padding: '60px 20px 80px',
+        background: `
+          radial-gradient(ellipse 120% 70% at 50% 15%,
+            rgba(130, 60, 8, 0.92) 0%,
+            rgba(80, 35, 5, 0.75) 25%,
+            rgba(30, 12, 3, 0.55) 52%,
+            transparent 72%),
+          radial-gradient(ellipse 70% 40% at 15% 5%,
+            rgba(90, 40, 7, 0.6) 0%, transparent 55%),
+          radial-gradient(ellipse 70% 40% at 85% 5%,
+            rgba(80, 35, 6, 0.5) 0%, transparent 55%),
+          linear-gradient(to bottom,
+            #1c0e04 0%, #0e0704 35%, #080508 65%, #050408 100%)
+        `,
+        backgroundAttachment: 'fixed',
+        overflow: 'hidden',
+      }}>
+        {/* Corner coordinates */}
+        <span style={{
+          position: 'absolute', top: '16px', left: '20px',
+          fontFamily: "'VT323', monospace",
+          fontSize: '0.75rem',
+          color: 'rgba(255,255,255,0.22)',
+          letterSpacing: '0.06em',
+        }}>K:-256 Y:128 Z:512</span>
+        <span style={{
+          position: 'absolute', top: '16px', right: '20px',
+          fontFamily: "'VT323', monospace",
+          fontSize: '0.75rem',
+          color: 'rgba(255,255,255,0.22)',
+          letterSpacing: '0.06em',
+        }}>X:256 Y:128 Z::512</span>
+
+        {/* CRYSTAL LEGACY badge */}
+        <div style={{
+          display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '22px',
+        }}>
+          <div style={{ width: '48px', height: '1px', background: 'rgba(239,68,68,0.6)' }} />
+          <span style={{
+            fontFamily: "'VT323', monospace",
+            fontSize: '0.9rem',
+            color: 'rgba(239,68,68,0.8)',
+            letterSpacing: '0.35em',
+          }}>CRYSTAL LEGACY</span>
+          <div style={{ width: '48px', height: '1px', background: 'rgba(239,68,68,0.6)' }} />
+        </div>
+
+        {/* CRAFT */}
+        <h1 style={{
+          fontFamily: "'Exo 2', sans-serif",
+          fontWeight: 800,
+          fontSize: 'clamp(3rem, 11vw, 7rem)',
+          color: 'white',
+          margin: 0,
+          lineHeight: 1,
+          letterSpacing: '0.04em',
+        }}>CRAFT</h1>
+
+        {/* WISDOM — each letter different color */}
+        <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '32px' }}>
+          {'WISDOM'.split('').map((l, i) => (
+            <span key={i} style={{
+              fontFamily: "'Exo 2', sans-serif",
+              fontWeight: 800,
+              fontSize: 'clamp(3rem, 11vw, 7rem)',
+              color: WISDOM_COLORS[i],
+              letterSpacing: '0.04em',
+              lineHeight: 1,
+            }}>{l}</span>
+          ))}
+        </div>
+
+        {/* Subtitle */}
+        <p style={{
+          fontFamily: "'VT323', monospace",
+          fontSize: 'clamp(1.1rem, 3vw, 1.35rem)',
+          color: 'rgba(255,255,255,0.6)',
+          maxWidth: '400px',
+          lineHeight: 1.6,
+          margin: '0 0 16px',
+        }}>
+          The ultimate knowledge repository for Minecraft pros. Tips, tricks, and techniques across every dimension.
+        </p>
+
+        {/* Coordinates */}
+        <p style={{
+          fontFamily: "'VT323', monospace",
+          fontSize: '0.82rem',
+          color: 'rgba(255,255,255,0.22)',
+          letterSpacing: '0.14em',
+        }}>
+          X:0 Y:128 Z:0 — OVERWORLD
+        </p>
+
+        {/* SELECT_CATEGORY label at bottom */}
+        <p style={{
+          position: 'absolute', bottom: '28px', left: '24px',
+          fontFamily: "'VT323', monospace",
+          fontSize: '0.82rem',
+          color: 'rgba(255,255,255,0.28)',
+          letterSpacing: '0.18em',
+          margin: 0,
+        }}>
+          // SELECT_CATEGORY
+        </p>
+      </section>
+
       {/* ── Category section ─────────────────────────── */}
       <section style={{
         maxWidth: '820px',
         margin: '0 auto',
-        padding: '40px 16px 0',
+        padding: '32px 16px 0',
       }}>
         <p style={{
           fontFamily: "'VT323', monospace",
