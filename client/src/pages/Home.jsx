@@ -21,10 +21,17 @@ const CATEGORIES = [
     icon: '⚔',
     desc: 'PvP & PvE Tactics',
     blurb: 'Dominate every encounter. PvP strategies, mob tactics, and gear optimization.',
-    bgImage: null,
-    idleOverlay: 'rgba(6,3,8,0.88)',
-    hoverOverlay: 'rgba(6,3,8,0.6)',
-    fallbackBg: 'radial-gradient(ellipse at 75% 50%, rgba(0,150,150,0.25) 0%, rgba(5,10,20,0.95) 60%)',
+    bgImage: '/cat-combat.png',
+    idleOverlay: 'rgba(4,3,10,0.88)',
+    hoverOverlay: 'rgba(4,3,10,0.52)',
+    fallbackBg: `
+      radial-gradient(ellipse 25% 35% at 78% 40%, rgba(120,60,255,0.55) 0%, transparent 70%),
+      radial-gradient(ellipse 15% 20% at 88% 65%, rgba(100,40,220,0.45) 0%, transparent 60%),
+      radial-gradient(ellipse 20% 25% at 65% 55%, rgba(80,30,180,0.3) 0%, transparent 65%),
+      radial-gradient(ellipse 30% 40% at 92% 30%, rgba(60,20,140,0.35) 0%, transparent 70%),
+      radial-gradient(ellipse 10% 15% at 72% 75%, rgba(140,70,255,0.4) 0%, transparent 55%),
+      linear-gradient(to right, #04030a 0%, #06040e 40%, #080512 70%, #060310 100%)
+    `,
   },
   {
     name: 'Building',
@@ -33,9 +40,16 @@ const CATEGORIES = [
     desc: 'Architecture & Design',
     blurb: 'Create stunning structures. Architecture tips, building techniques, and design inspiration.',
     bgImage: null,
-    idleOverlay: 'rgba(6,3,8,0.88)',
-    hoverOverlay: 'rgba(6,3,8,0.6)',
-    fallbackBg: 'radial-gradient(ellipse at 75% 50%, rgba(20,140,50,0.28) 0%, rgba(5,12,8,0.95) 60%)',
+    idleOverlay: 'rgba(3,8,4,0.88)',
+    hoverOverlay: 'rgba(3,8,4,0.52)',
+    fallbackBg: `
+      radial-gradient(ellipse 25% 35% at 80% 45%, rgba(20,180,60,0.5) 0%, transparent 70%),
+      radial-gradient(ellipse 15% 20% at 90% 65%, rgba(15,150,45,0.4) 0%, transparent 60%),
+      radial-gradient(ellipse 20% 25% at 68% 60%, rgba(10,120,35,0.3) 0%, transparent 65%),
+      radial-gradient(ellipse 30% 40% at 93% 28%, rgba(8,100,25,0.35) 0%, transparent 70%),
+      radial-gradient(ellipse 10% 15% at 75% 78%, rgba(25,200,70,0.38) 0%, transparent 55%),
+      linear-gradient(to right, #030804 0%, #040a05 40%, #050e06 70%, #040c05 100%)
+    `,
   },
   {
     name: 'Farming',
@@ -44,9 +58,16 @@ const CATEGORIES = [
     desc: 'Automation & Resources',
     blurb: 'Automate your resources. Efficient farms, crop mechanics, and mob grinding setups.',
     bgImage: null,
-    idleOverlay: 'rgba(6,3,8,0.88)',
-    hoverOverlay: 'rgba(6,3,8,0.6)',
-    fallbackBg: 'radial-gradient(ellipse at 75% 50%, rgba(95,170,5,0.28) 0%, rgba(8,12,3,0.95) 60%)',
+    idleOverlay: 'rgba(5,7,3,0.88)',
+    hoverOverlay: 'rgba(5,7,3,0.52)',
+    fallbackBg: `
+      radial-gradient(ellipse 25% 35% at 79% 42%, rgba(120,200,10,0.5) 0%, transparent 70%),
+      radial-gradient(ellipse 15% 20% at 89% 68%, rgba(100,170,8,0.42) 0%, transparent 60%),
+      radial-gradient(ellipse 20% 25% at 67% 58%, rgba(80,140,6,0.3) 0%, transparent 65%),
+      radial-gradient(ellipse 30% 40% at 94% 25%, rgba(60,110,5,0.35) 0%, transparent 70%),
+      radial-gradient(ellipse 10% 15% at 73% 80%, rgba(140,220,12,0.38) 0%, transparent 55%),
+      linear-gradient(to right, #050703 0%, #070a04 40%, #090d05 70%, #070b04 100%)
+    `,
   },
   {
     name: 'Survival',
@@ -55,9 +76,16 @@ const CATEGORIES = [
     desc: 'Exploration & Strategy',
     blurb: 'Explore and survive. Navigation, resource gathering, and base setup strategies.',
     bgImage: null,
-    idleOverlay: 'rgba(6,3,8,0.88)',
-    hoverOverlay: 'rgba(6,3,8,0.6)',
-    fallbackBg: 'radial-gradient(ellipse at 75% 50%, rgba(180,80,5,0.28) 0%, rgba(12,6,3,0.95) 60%)',
+    idleOverlay: 'rgba(8,4,2,0.88)',
+    hoverOverlay: 'rgba(8,4,2,0.52)',
+    fallbackBg: `
+      radial-gradient(ellipse 25% 35% at 80% 43%, rgba(240,100,10,0.52) 0%, transparent 70%),
+      radial-gradient(ellipse 15% 20% at 90% 66%, rgba(200,80,8,0.43) 0%, transparent 60%),
+      radial-gradient(ellipse 20% 25% at 67% 57%, rgba(160,65,6,0.32) 0%, transparent 65%),
+      radial-gradient(ellipse 30% 40% at 93% 27%, rgba(130,50,5,0.36) 0%, transparent 70%),
+      radial-gradient(ellipse 10% 15% at 74% 79%, rgba(255,120,15,0.4) 0%, transparent 55%),
+      linear-gradient(to right, #080402 0%, #0a0503 40%, #0d0604 70%, #0b0503 100%)
+    `,
   },
 ];
 
@@ -217,8 +245,8 @@ export default function Home() {
                   transition: 'border-color 0.55s ease',
                   position: 'relative',
                   cursor: 'pointer',
-                  /* Background: image (if any) or fallback gradient */
-                  background: cat.bgImage ? '#080508' : (cat.fallbackBg || '#080508'),
+                  background: cat.bgImage ? '#080508' : undefined,
+                  backgroundImage: !cat.bgImage ? cat.fallbackBg : undefined,
                   backgroundSize: 'cover',
                   backgroundPosition: 'center',
                 }}
