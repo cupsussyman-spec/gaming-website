@@ -98,19 +98,23 @@ export default function Home() {
         textAlign: 'center',
         padding: '60px 20px 80px',
         background: `
-          radial-gradient(ellipse 120% 70% at 50% 15%,
-            rgba(130, 60, 8, 0.92) 0%,
-            rgba(80, 35, 5, 0.75) 25%,
-            rgba(30, 12, 3, 0.55) 52%,
-            transparent 72%),
-          radial-gradient(ellipse 70% 40% at 15% 5%,
-            rgba(90, 40, 7, 0.6) 0%, transparent 55%),
-          radial-gradient(ellipse 70% 40% at 85% 5%,
-            rgba(80, 35, 6, 0.5) 0%, transparent 55%),
           linear-gradient(to bottom,
-            #1c0e04 0%, #0e0704 35%, #080508 65%, #050408 100%)
+            rgba(5,3,8,0.45) 0%,
+            rgba(5,3,8,0.55) 50%,
+            rgba(5,3,8,0.85) 85%,
+            rgba(5,3,8,1) 100%
+          )`,
+        backgroundImage: `
+          linear-gradient(to bottom,
+            rgba(5,3,8,0.45) 0%,
+            rgba(5,3,8,0.55) 50%,
+            rgba(5,3,8,0.85) 85%,
+            rgba(5,3,8,1) 100%
+          ),
+          url('/hero-bg.png')
         `,
-        backgroundAttachment: 'fixed',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center 40%',
         overflow: 'hidden',
       }}>
         {/* Corner coordinates */}
