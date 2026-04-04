@@ -8,17 +8,12 @@ html {
 }
 
 body {
-  background-color: #0a0608;
+  background-color: #080608;
   background-image:
-    radial-gradient(ellipse 180% 55% at 58% 0%,
-      rgba(90, 35, 8, 0.96) 0%,
-      rgba(50, 18, 5, 0.72) 24%,
-      rgba(14, 6, 2, 0.32) 54%,
-      transparent 72%),
-    radial-gradient(ellipse 70% 35% at 5% 8%,
-      rgba(60, 22, 6, 0.62) 0%,
-      transparent 50%),
-    linear-gradient(to bottom, #0e0608 0%, #070509 45%, #05050c 100%);
+    radial-gradient(ellipse 160% 30% at 55% 0%,
+      rgba(70, 28, 6, 0.85) 0%,
+      rgba(30, 10, 3, 0.5) 30%,
+      transparent 60%);
   background-attachment: fixed;
   font-family: 'VT323', monospace;
   color: white;
