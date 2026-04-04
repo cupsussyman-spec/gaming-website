@@ -245,31 +245,32 @@ export default function Home() {
                   transition: 'border-color 0.55s ease',
                   position: 'relative',
                   cursor: 'pointer',
-                  background: cat.bgImage ? '#080508' : undefined,
-                  backgroundImage: !cat.bgImage ? cat.fallbackBg : undefined,
-                  backgroundSize: 'cover',
-                  backgroundPosition: 'center',
+                  background: 'rgba(255,255,255,0.04)',
+                  backdropFilter: 'blur(12px)',
+                  WebkitBackdropFilter: 'blur(12px)',
                 }}
                 onMouseEnter={() => setExpanded(cat.name)}
                 onMouseLeave={() => setExpanded('')}
               >
-                {/* Actual background image (if provided) */}
-                {cat.bgImage && (
-                  <div style={{
-                    position: 'absolute', inset: 0,
-                    backgroundImage: `url('${cat.bgImage}')`,
-                    backgroundSize: 'cover',
-                    backgroundPosition: 'center',
-                    opacity: isOpen ? 0.55 : 0.12,
-                    transition: 'opacity 0.55s ease',
-                    pointerEvents: 'none',
-                  }} />
-                )}
-
-                {/* Dark overlay — lifts on hover */}
+                {/* Background image */}
                 <div style={{
                   position: 'absolute', inset: 0,
-                  background: isOpen ? cat.hoverOverlay : cat.idleOverlay,
+                  backgroundImage: cat.bgImage
+                    ? `url('${cat.bgImage}')`
+                    : cat.fallbackBg,
+                  backgroundSize: 'cover',
+                  backgroundPosition: 'center',
+                  opacity: isOpen ? 0.6 : 0.3,
+                  transition: 'opacity 0.55s ease',
+                  pointerEvents: 'none',
+                }} />
+
+                {/* Glass overlay — lighter on hover */}
+                <div style={{
+                  position: 'absolute', inset: 0,
+                  background: isOpen
+                    ? 'rgba(10,8,16,0.35)'
+                    : 'rgba(10,8,16,0.62)',
                   transition: 'background 0.55s ease',
                   pointerEvents: 'none',
                 }} />
