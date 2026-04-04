@@ -11,9 +11,9 @@ const CATEGORIES = [
     desc: 'Circuits & Contraptions',
     blurb: 'Master the art of redstone engineering. From simple doors to complex computing machines.',
     bgImage: '/cat-redstone.png',
-    // overlay: dark idle → lighter on hover (handled inline)
     idleOverlay: 'rgba(6,3,8,0.88)',
     hoverOverlay: 'rgba(6,3,8,0.55)',
+    colorTint: null,
   },
   {
     name: 'Combat',
@@ -21,17 +21,10 @@ const CATEGORIES = [
     icon: '⚔',
     desc: 'PvP & PvE Tactics',
     blurb: 'Dominate every encounter. PvP strategies, mob tactics, and gear optimization.',
-    bgImage: '/cat-combat.png',
-    idleOverlay: 'rgba(4,3,10,0.88)',
-    hoverOverlay: 'rgba(4,3,10,0.52)',
-    fallbackBg: `
-      radial-gradient(ellipse 25% 35% at 78% 40%, rgba(120,60,255,0.55) 0%, transparent 70%),
-      radial-gradient(ellipse 15% 20% at 88% 65%, rgba(100,40,220,0.45) 0%, transparent 60%),
-      radial-gradient(ellipse 20% 25% at 65% 55%, rgba(80,30,180,0.3) 0%, transparent 65%),
-      radial-gradient(ellipse 30% 40% at 92% 30%, rgba(60,20,140,0.35) 0%, transparent 70%),
-      radial-gradient(ellipse 10% 15% at 72% 75%, rgba(140,70,255,0.4) 0%, transparent 55%),
-      linear-gradient(to right, #04030a 0%, #06040e 40%, #080512 70%, #060310 100%)
-    `,
+    bgImage: '/cat-redstone.png',
+    idleOverlay: 'rgba(8,4,20,0.78)',
+    hoverOverlay: 'rgba(8,4,20,0.45)',
+    colorTint: 'rgba(80,30,180,0.35)',
   },
   {
     name: 'Building',
@@ -39,17 +32,10 @@ const CATEGORIES = [
     icon: '🏗',
     desc: 'Architecture & Design',
     blurb: 'Transform blocks into breathtaking structures. From cottages to cathedrals.',
-    bgImage: '/cat-building.png',
-    idleOverlay: 'rgba(3,6,8,0.88)',
-    hoverOverlay: 'rgba(3,6,8,0.52)',
-    fallbackBg: `
-      radial-gradient(ellipse 25% 35% at 80% 45%, rgba(20,180,60,0.5) 0%, transparent 70%),
-      radial-gradient(ellipse 15% 20% at 90% 65%, rgba(15,150,45,0.4) 0%, transparent 60%),
-      radial-gradient(ellipse 20% 25% at 68% 60%, rgba(10,120,35,0.3) 0%, transparent 65%),
-      radial-gradient(ellipse 30% 40% at 93% 28%, rgba(8,100,25,0.35) 0%, transparent 70%),
-      radial-gradient(ellipse 10% 15% at 75% 78%, rgba(25,200,70,0.38) 0%, transparent 55%),
-      linear-gradient(to right, #030804 0%, #040a05 40%, #050e06 70%, #040c05 100%)
-    `,
+    bgImage: '/cat-redstone.png',
+    idleOverlay: 'rgba(4,16,8,0.78)',
+    hoverOverlay: 'rgba(4,16,8,0.45)',
+    colorTint: 'rgba(20,140,50,0.35)',
   },
   {
     name: 'Farming',
@@ -57,17 +43,10 @@ const CATEGORIES = [
     icon: '🌾',
     desc: 'Automation & Resources',
     blurb: 'Build efficient farms for every resource. Automate your way to abundance.',
-    bgImage: '/cat-farming.png',
-    idleOverlay: 'rgba(4,6,3,0.88)',
-    hoverOverlay: 'rgba(4,6,3,0.52)',
-    fallbackBg: `
-      radial-gradient(ellipse 25% 35% at 79% 42%, rgba(120,200,10,0.5) 0%, transparent 70%),
-      radial-gradient(ellipse 15% 20% at 89% 68%, rgba(100,170,8,0.42) 0%, transparent 60%),
-      radial-gradient(ellipse 20% 25% at 67% 58%, rgba(80,140,6,0.3) 0%, transparent 65%),
-      radial-gradient(ellipse 30% 40% at 94% 25%, rgba(60,110,5,0.35) 0%, transparent 70%),
-      radial-gradient(ellipse 10% 15% at 73% 80%, rgba(140,220,12,0.38) 0%, transparent 55%),
-      linear-gradient(to right, #050703 0%, #070a04 40%, #090d05 70%, #070b04 100%)
-    `,
+    bgImage: '/cat-redstone.png',
+    idleOverlay: 'rgba(8,16,4,0.78)',
+    hoverOverlay: 'rgba(8,16,4,0.45)',
+    colorTint: 'rgba(100,180,10,0.35)',
   },
   {
     name: 'Survival',
@@ -75,17 +54,10 @@ const CATEGORIES = [
     icon: '🧭',
     desc: 'Exploration & Strategy',
     blurb: 'Survive and thrive in any biome. Essential knowledge for every adventurer.',
-    bgImage: '/cat-survival.png',
-    idleOverlay: 'rgba(6,3,3,0.88)',
-    hoverOverlay: 'rgba(6,3,3,0.52)',
-    fallbackBg: `
-      radial-gradient(ellipse 25% 35% at 80% 43%, rgba(240,100,10,0.52) 0%, transparent 70%),
-      radial-gradient(ellipse 15% 20% at 90% 66%, rgba(200,80,8,0.43) 0%, transparent 60%),
-      radial-gradient(ellipse 20% 25% at 67% 57%, rgba(160,65,6,0.32) 0%, transparent 65%),
-      radial-gradient(ellipse 30% 40% at 93% 27%, rgba(130,50,5,0.36) 0%, transparent 70%),
-      radial-gradient(ellipse 10% 15% at 74% 79%, rgba(255,120,15,0.4) 0%, transparent 55%),
-      linear-gradient(to right, #080402 0%, #0a0503 40%, #0d0604 70%, #0b0503 100%)
-    `,
+    bgImage: '/cat-redstone.png',
+    idleOverlay: 'rgba(20,8,4,0.78)',
+    hoverOverlay: 'rgba(20,8,4,0.45)',
+    colorTint: 'rgba(220,90,10,0.35)',
   },
 ];
 
@@ -256,16 +228,25 @@ export default function Home() {
                 <div style={{
                   position: 'absolute',
                   inset: '-6px',
-                  backgroundImage: cat.bgImage
-                    ? `url('${cat.bgImage}')`
-                    : cat.fallbackBg,
+                  backgroundImage: `url('${cat.bgImage}')`,
                   backgroundSize: 'cover',
                   backgroundPosition: 'center',
-                  opacity: isOpen ? 0.65 : 0.35,
-                  filter: 'blur(5px)',
+                  opacity: isOpen ? 0.8 : 0.6,
+                  filter: 'blur(4px)',
                   transition: 'opacity 0.55s ease',
                   pointerEvents: 'none',
                 }} />
+
+                {/* Color tint layer */}
+                {cat.colorTint && (
+                  <div style={{
+                    position: 'absolute', inset: 0,
+                    background: cat.colorTint,
+                    opacity: isOpen ? 1 : 0.6,
+                    transition: 'opacity 0.55s ease',
+                    pointerEvents: 'none',
+                  }} />
+                )}
 
                 {/* Glass overlay — lighter on hover */}
                 <div style={{
