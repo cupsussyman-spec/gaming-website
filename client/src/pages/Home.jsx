@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const WISDOM_COLORS = ['#ef4444', '#ec4899', '#a855f7', '#8b5cf6', '#84cc16', '#22c55e'];
@@ -83,6 +84,7 @@ const CATEGORIES = [
 
 export default function Home() {
   const navigate = useNavigate();
+  const [expanded, setExpanded] = useState('Redstone');
 
   return (
     <div style={{ minHeight: '100vh', paddingBottom: '80px' }}>
@@ -223,95 +225,118 @@ export default function Home() {
           // SELECT_CATEGORY
         </p>
 
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-          {CATEGORIES.map((cat) => (
-            <button
-              key={cat.name}
-              onClick={() => navigate(`/tips/${cat.name}`)}
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: '16px',
-                padding: '18px 22px',
-                borderRadius: '12px',
-                border: `1px solid rgba(255,255,255,0.09)`,
-                background: cat.cardBg,
-                backgroundBlendMode: 'normal',
-                cursor: 'pointer',
-                textAlign: 'left',
-                position: 'relative',
-                overflow: 'hidden',
-                transition: 'border-color 0.2s, transform 0.15s',
-                width: '100%',
-              }}
-              onMouseEnter={e => {
-                e.currentTarget.style.borderColor = `${cat.color}50`;
-                e.currentTarget.style.transform = 'translateY(-1px)';
-              }}
-              onMouseLeave={e => {
-                e.currentTarget.style.borderColor = 'rgba(255,255,255,0.09)';
-                e.currentTarget.style.transform = 'translateY(0)';
-              }}
-            >
-              {/* Accent glow overlay (right side) */}
-              <div style={{
-                position: 'absolute',
-                inset: 0,
-                backgroundImage: cat.cardAccent,
-                pointerEvents: 'none',
-              }} />
-
-              {/* Icon */}
-              <div style={{
-                width: '44px',
-                height: '44px',
-                borderRadius: '10px',
-                background: `${cat.color}22`,
-                border: `1px solid ${cat.color}55`,
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                fontSize: '1.25rem',
-                flexShrink: 0,
-                position: 'relative',
-                zIndex: 1,
-              }}>
-                {cat.icon}
-              </div>
-
-              {/* Text */}
-              <div style={{ position: 'relative', zIndex: 1 }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+          {CATEGORIES.map((cat) => {
+            const isOpen = expanded === cat.name;
+            return (
+              <div
+                key={cat.name}
+                style={{
+                  borderRadius: '12px',
+                  border: isOpen ? `1px solid ${cat.color}45` : '1px solid rgba(255,255,255,0.08)',
+                  overflow: 'hidden',
+                  transition: 'border-color 0.3s',
+                  background: cat.cardBg,
+                  position: 'relative',
+                  cursor: 'pointer',
+                }}
+                onClick={() => setExpanded(isOpen ? '' : cat.name)}
+              >
+                {/* Accent glow — always present, more visible when open */}
                 <div style={{
-                  fontFamily: "'Exo 2', sans-serif",
-                  fontWeight: 700,
-                  fontSize: '1rem',
-                  color: 'white',
-                  letterSpacing: '0.07em',
-                  marginBottom: '3px',
-                }}>
-                  {cat.name.toUpperCase()}
-                </div>
+                  position: 'absolute', inset: 0,
+                  backgroundImage: cat.cardAccent,
+                  opacity: isOpen ? 1 : 0.4,
+                  transition: 'opacity 0.4s',
+                  pointerEvents: 'none',
+                }} />
+
+                {/* Header row */}
                 <div style={{
-                  fontFamily: "'VT323', monospace",
-                  fontSize: '1rem',
-                  color: 'rgba(255,255,255,0.38)',
-                  letterSpacing: '0.03em',
+                  display: 'flex', alignItems: 'center', gap: '14px',
+                  padding: '16px 20px',
+                  position: 'relative', zIndex: 1,
                 }}>
-                  {cat.desc}
+                  {/* Icon */}
+                  <div style={{
+                    width: '44px', height: '44px', borderRadius: '10px', flexShrink: 0,
+                    background: `${cat.color}22`, border: `1px solid ${cat.color}55`,
+                    display: 'flex', alignItems: 'center', justifyContent: 'center',
+                    fontSize: '1.2rem',
+                    boxShadow: isOpen ? `0 0 12px ${cat.color}40` : 'none',
+                    transition: 'box-shadow 0.3s',
+                  }}>{cat.icon}</div>
+
+                  {/* Title + subtitle */}
+                  <div style={{ flex: 1 }}>
+                    <div style={{
+                      fontFamily: "'Exo 2', sans-serif", fontWeight: 700,
+                      fontSize: '1rem', letterSpacing: '0.07em',
+                      color: isOpen ? 'white' : 'rgba(255,255,255,0.85)',
+                    }}>{cat.name.toUpperCase()}</div>
+                    <div style={{
+                      fontFamily: "'VT323', monospace", fontSize: '1rem',
+                      color: 'rgba(255,255,255,0.38)', letterSpacing: '0.02em',
+                    }}>{cat.desc}</div>
+                  </div>
+
+                  {/* Arrow */}
+                  <span style={{
+                    color: isOpen ? cat.color : 'rgba(255,255,255,0.25)',
+                    fontSize: '1.2rem', flexShrink: 0,
+                    transform: isOpen ? 'rotate(90deg)' : 'rotate(0deg)',
+                    transition: 'transform 0.3s, color 0.3s',
+                    display: 'inline-block',
+                  }}>›</span>
+                </div>
+
+                {/* Expandable body */}
+                <div style={{
+                  maxHeight: isOpen ? '220px' : '0',
+                  overflow: 'hidden',
+                  transition: 'max-height 0.4s cubic-bezier(0.4,0,0.2,1)',
+                }}>
+                  <div style={{
+                    padding: '0 20px 20px 78px',
+                    opacity: isOpen ? 1 : 0,
+                    transform: isOpen ? 'translateY(0)' : 'translateY(-8px)',
+                    transition: 'opacity 0.3s ease 0.1s, transform 0.3s ease 0.1s',
+                    position: 'relative', zIndex: 1,
+                  }}>
+                    <p style={{
+                      fontFamily: "'VT323', monospace", fontSize: '1.1rem',
+                      color: 'rgba(255,255,255,0.62)', lineHeight: 1.55,
+                      margin: '0 0 16px',
+                    }}>{cat.blurb}</p>
+
+                    <button
+                      onClick={(e) => { e.stopPropagation(); navigate(`/tips/${cat.name}`); }}
+                      style={{
+                        background: 'none', border: 'none', padding: 0,
+                        cursor: 'pointer',
+                        display: 'inline-flex', alignItems: 'center', gap: '6px',
+                        fontFamily: "'Exo 2', sans-serif", fontWeight: 700,
+                        fontSize: '0.8rem', color: cat.color, letterSpacing: '0.08em',
+                        borderBottom: `1px solid ${cat.color}`,
+                        paddingBottom: '1px',
+                        transition: 'opacity 0.2s',
+                      }}
+                      onMouseEnter={e => e.currentTarget.style.opacity = '0.7'}
+                      onMouseLeave={e => e.currentTarget.style.opacity = '1'}
+                    >
+                      EXPLORE TIPS →
+                    </button>
+                  </div>
+
+                  {/* Colored bottom line */}
+                  <div style={{
+                    height: '2px',
+                    background: `linear-gradient(to right, ${cat.color}80, ${cat.color}20, transparent)`,
+                  }} />
                 </div>
               </div>
-
-              {/* Arrow */}
-              <div style={{
-                marginLeft: 'auto',
-                color: 'rgba(255,255,255,0.25)',
-                fontSize: '1.1rem',
-                position: 'relative',
-                zIndex: 1,
-                flexShrink: 0,
-              }}>›</div>
-            </button>
-          ))}
+            );
+          })}
         </div>
       </section>
     </div>
