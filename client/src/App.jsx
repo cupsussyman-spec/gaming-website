@@ -3,6 +3,7 @@ import { AuthProvider, useAuth } from './context/AuthContext';
 import Navbar from './components/Navbar';
 import BottomNav from './components/BottomNav';
 import Home from './pages/Home';
+import CategoryTips from './pages/CategoryTips';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Submit from './pages/Submit';
@@ -24,6 +25,7 @@ function AppRoutes() {
         <Route path="/register" element={<Register />} />
         <Route path="/auth/callback" element={<AuthCallback />} />
         <Route path="/" element={<Home />} />
+        <Route path="/tips/:category" element={<CategoryTips />} />
         <Route
           path="/submit"
           element={
