@@ -22,9 +22,9 @@ const CATEGORIES = [
     desc: 'PvP & PvE Tactics',
     blurb: 'Dominate every encounter. PvP strategies, mob tactics, and gear optimization.',
     bgImage: '/cat-redstone.png',
-    idleOverlay: 'rgba(8,4,20,0.78)',
-    hoverOverlay: 'rgba(8,4,20,0.45)',
-    colorTint: 'rgba(80,30,180,0.35)',
+    idleOverlay: 'rgba(4,2,10,0.52)',
+    hoverOverlay: 'rgba(4,2,10,0.25)',
+    colorTint: 'rgba(80,20,200,0.55)',
   },
   {
     name: 'Building',
@@ -33,9 +33,9 @@ const CATEGORIES = [
     desc: 'Architecture & Design',
     blurb: 'Transform blocks into breathtaking structures. From cottages to cathedrals.',
     bgImage: '/cat-redstone.png',
-    idleOverlay: 'rgba(4,16,8,0.78)',
-    hoverOverlay: 'rgba(4,16,8,0.45)',
-    colorTint: 'rgba(20,140,50,0.35)',
+    idleOverlay: 'rgba(2,10,4,0.52)',
+    hoverOverlay: 'rgba(2,10,4,0.25)',
+    colorTint: 'rgba(15,140,45,0.55)',
   },
   {
     name: 'Farming',
@@ -44,9 +44,9 @@ const CATEGORIES = [
     desc: 'Automation & Resources',
     blurb: 'Build efficient farms for every resource. Automate your way to abundance.',
     bgImage: '/cat-redstone.png',
-    idleOverlay: 'rgba(8,16,4,0.78)',
-    hoverOverlay: 'rgba(8,16,4,0.45)',
-    colorTint: 'rgba(100,180,10,0.35)',
+    idleOverlay: 'rgba(4,10,2,0.52)',
+    hoverOverlay: 'rgba(4,10,2,0.25)',
+    colorTint: 'rgba(110,190,5,0.55)',
   },
   {
     name: 'Survival',
@@ -55,9 +55,9 @@ const CATEGORIES = [
     desc: 'Exploration & Strategy',
     blurb: 'Survive and thrive in any biome. Essential knowledge for every adventurer.',
     bgImage: '/cat-redstone.png',
-    idleOverlay: 'rgba(20,8,4,0.78)',
-    hoverOverlay: 'rgba(20,8,4,0.45)',
-    colorTint: 'rgba(220,90,10,0.35)',
+    idleOverlay: 'rgba(12,4,2,0.52)',
+    hoverOverlay: 'rgba(12,4,2,0.25)',
+    colorTint: 'rgba(230,85,5,0.55)',
   },
 ];
 
@@ -242,18 +242,15 @@ export default function Home() {
                   <div style={{
                     position: 'absolute', inset: 0,
                     background: cat.colorTint,
-                    opacity: isOpen ? 1 : 0.6,
                     transition: 'opacity 0.55s ease',
                     pointerEvents: 'none',
                   }} />
                 )}
 
-                {/* Glass overlay — lighter on hover */}
+                {/* Glass overlay — per-card darkness, lighter on hover */}
                 <div style={{
                   position: 'absolute', inset: 0,
-                  background: isOpen
-                    ? 'rgba(10,8,16,0.35)'
-                    : 'rgba(10,8,16,0.62)',
+                  background: isOpen ? cat.hoverOverlay : cat.idleOverlay,
                   transition: 'background 0.55s ease',
                   pointerEvents: 'none',
                 }} />
