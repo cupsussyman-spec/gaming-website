@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import Navbar from './components/Navbar';
+import BottomNav from './components/BottomNav';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Register from './pages/Register';
@@ -16,20 +17,13 @@ function ProtectedRoute({ children }) {
 
 function AppRoutes() {
   return (
-    <div className="min-h-screen relative z-10">
+    <div style={{ minHeight: '100vh', paddingTop: '60px' }}>
       <Navbar />
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/auth/callback" element={<AuthCallback />} />
-        <Route
-          path="/"
-          element={
-            <ProtectedRoute>
-              <Home />
-            </ProtectedRoute>
-          }
-        />
+        <Route path="/" element={<Home />} />
         <Route
           path="/submit"
           element={
@@ -38,16 +32,10 @@ function AppRoutes() {
             </ProtectedRoute>
           }
         />
-        <Route
-          path="/profile/:username"
-          element={
-            <ProtectedRoute>
-              <Profile />
-            </ProtectedRoute>
-          }
-        />
+        <Route path="/profile/:username" element={<Profile />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
+      <BottomNav />
     </div>
   );
 }

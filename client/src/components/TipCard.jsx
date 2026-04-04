@@ -1,60 +1,71 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import CategoryBadge from './CategoryBadge';
 import VoteButtons from './VoteButtons';
 
+const CATEGORY_COLORS = {
+  Redstone: '#ef4444',
+  Combat:   '#8b5cf6',
+  Building: '#22c55e',
+  Farming:  '#84cc16',
+  Survival: '#f97316',
+};
+
 function formatDate(dateStr) {
-  const date = new Date(dateStr);
-  return date.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+  return new Date(dateStr).toLocaleDateString('en-US', {
+    year: 'numeric', month: 'short', day: 'numeric',
+  });
 }
 
 export default function TipCard({ tip, showActions = false, onEdit, onDelete, userVote = null }) {
   const [expanded, setExpanded] = useState(false);
 
   const content = tip.content || '';
-  const truncated = content.length > 150 ? content.slice(0, 150) + '...' : content;
-  const needsTruncation = content.length > 150;
+  const truncated = content.length > 160 ? content.slice(0, 160) + '...' : content;
+  const needsTruncation = content.length > 160;
+  const color = CATEGORY_COLORS[tip.category] || '#fff';
 
   return (
-    <div
-      className="tip-card-hover"
-      style={{
-        background: '#0d0d1a',
-        border: '4px solid #4CAF50',
-        boxShadow: '4px 4px 0px #2d7a2d, inset -2px -2px 0px rgba(0,0,0,0.3)',
-        padding: '16px',
-        display: 'flex',
-        flexDirection: 'column',
-        gap: '12px',
-        position: 'relative',
-      }}
-    >
-      {/* Top row: category badge */}
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '8px' }}>
-        <h3
-          style={{
-            fontFamily: "'Press Start 2P', monospace",
-            fontSize: '0.6rem',
-            color: 'white',
-            lineHeight: '1.6',
-            flex: 1,
-            margin: 0,
-          }}
-        >
+    <div className="tip-card" style={{
+      borderLeft: `2px solid ${color}40`,
+    }}>
+      {/* Category badge + title */}
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '10px' }}>
+        <h3 style={{
+          fontFamily: "'Exo 2', sans-serif",
+          fontWeight: 700,
+          fontSize: '0.9rem',
+          color: 'white',
+          lineHeight: 1.4,
+          flex: 1,
+          margin: 0,
+        }}>
           {tip.title}
         </h3>
-        <CategoryBadge category={tip.category} />
+        <span style={{
+          fontFamily: "'Exo 2', sans-serif",
+          fontWeight: 700,
+          fontSize: '0.6rem',
+          color: color,
+          background: `${color}18`,
+          border: `1px solid ${color}40`,
+          padding: '3px 8px',
+          borderRadius: '4px',
+          whiteSpace: 'nowrap',
+          letterSpacing: '0.06em',
+          flexShrink: 0,
+        }}>
+          {tip.category?.toUpperCase()}
+        </span>
       </div>
 
       {/* Content */}
-      <div
-        style={{
-          fontFamily: "'VT323', monospace",
-          fontSize: '1.15rem',
-          color: '#ccc',
-          lineHeight: '1.4',
-        }}
-      >
+      <p style={{
+        fontFamily: "'VT323', monospace",
+        fontSize: '1.1rem',
+        color: 'rgba(255,255,255,0.6)',
+        lineHeight: 1.5,
+        margin: 0,
+      }}>
         {expanded ? content : truncated}
         {needsTruncation && (
           <button
@@ -62,21 +73,21 @@ export default function TipCard({ tip, showActions = false, onEdit, onDelete, us
             style={{
               background: 'none',
               border: 'none',
-              color: '#4CAF50',
+              color: color,
               cursor: 'pointer',
               fontFamily: "'VT323', monospace",
-              fontSize: '1.1rem',
+              fontSize: '1rem',
               marginLeft: '6px',
               padding: 0,
               textDecoration: 'underline',
             }}
           >
-            {expanded ? 'Show Less' : 'Read More'}
+            {expanded ? 'Less' : 'More'}
           </button>
         )}
-      </div>
+      </p>
 
-      {/* YouTube link */}
+      {/* YouTube */}
       {tip.youtube_url && (
         <a
           href={tip.youtube_url}
@@ -84,19 +95,19 @@ export default function TipCard({ tip, showActions = false, onEdit, onDelete, us
           rel="noopener noreferrer"
           style={{
             color: '#ef4444',
-            fontFamily: "'VT323', monospace",
-            fontSize: '1.1rem',
+            fontFamily: "'Exo 2', sans-serif",
+            fontWeight: 600,
+            fontSize: '0.75rem',
             textDecoration: 'none',
-            border: '2px solid #ef4444',
-            padding: '4px 10px',
-            display: 'inline-block',
+            background: 'rgba(239,68,68,0.1)',
+            border: '1px solid rgba(239,68,68,0.25)',
+            padding: '5px 12px',
+            borderRadius: '5px',
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: '5px',
+            letterSpacing: '0.04em',
             alignSelf: 'flex-start',
-          }}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.background = 'rgba(239, 68, 68, 0.15)';
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.background = 'none';
           }}
         >
           ▶ WATCH VIDEO
@@ -111,30 +122,28 @@ export default function TipCard({ tip, showActions = false, onEdit, onDelete, us
         userVote={userVote}
       />
 
-      {/* Bottom row */}
-      <div
-        style={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          borderTop: '2px solid #2a2a4a',
-          paddingTop: '10px',
-          flexWrap: 'wrap',
-          gap: '8px',
-        }}
-      >
-        <span style={{ fontFamily: "'VT323', monospace", fontSize: '1rem', color: '#888' }}>
+      {/* Footer */}
+      <div style={{
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        borderTop: '1px solid rgba(255,255,255,0.06)',
+        paddingTop: '10px',
+        flexWrap: 'wrap',
+        gap: '8px',
+      }}>
+        <span style={{ fontFamily: "'VT323', monospace", fontSize: '0.95rem', color: 'rgba(255,255,255,0.3)' }}>
           by{' '}
           <Link
             to={`/profile/${tip.username}`}
-            style={{ color: '#4CAF50', textDecoration: 'none' }}
-            onMouseEnter={(e) => { e.currentTarget.style.color = '#FFD700'; }}
-            onMouseLeave={(e) => { e.currentTarget.style.color = '#4CAF50'; }}
+            style={{ color: 'rgba(255,255,255,0.65)', textDecoration: 'none' }}
+            onMouseEnter={e => e.currentTarget.style.color = 'white'}
+            onMouseLeave={e => e.currentTarget.style.color = 'rgba(255,255,255,0.65)'}
           >
             {tip.username}
           </Link>
-          {' '}&bull;{' '}
-          <span style={{ color: '#666' }}>{formatDate(tip.created_at)}</span>
+          {' · '}
+          <span style={{ color: 'rgba(255,255,255,0.25)' }}>{formatDate(tip.created_at)}</span>
         </span>
 
         {showActions && (
@@ -145,9 +154,11 @@ export default function TipCard({ tip, showActions = false, onEdit, onDelete, us
               style={{
                 background: 'transparent',
                 color: '#FFD700',
-                fontFamily: "'VT323', monospace",
-                fontSize: '1rem',
+                fontFamily: "'Exo 2', sans-serif",
+                fontWeight: 600,
+                fontSize: '0.75rem',
                 padding: '4px 10px',
+                letterSpacing: '0.04em',
               }}
             >
               EDIT
@@ -158,9 +169,11 @@ export default function TipCard({ tip, showActions = false, onEdit, onDelete, us
               style={{
                 background: 'transparent',
                 color: '#ef4444',
-                fontFamily: "'VT323', monospace",
-                fontSize: '1rem',
+                fontFamily: "'Exo 2', sans-serif",
+                fontWeight: 600,
+                fontSize: '0.75rem',
                 padding: '4px 10px',
+                letterSpacing: '0.04em',
               }}
             >
               DELETE

@@ -121,6 +121,7 @@ router.post('/oauth', async (req, res) => {
 
     const email = supabaseUser.email;
     const fullName = supabaseUser.user_metadata?.full_name || supabaseUser.user_metadata?.name || '';
+    const avatarUrl = supabaseUser.user_metadata?.avatar_url || supabaseUser.user_metadata?.picture || null;
 
     // Find or create user in our users table
     let { data: user } = await supabase
@@ -156,7 +157,7 @@ router.post('/oauth', async (req, res) => {
       { expiresIn: '7d' }
     );
 
-    res.json({ token, user: { id: user.id, username: user.username, email: user.email } });
+    res.json({ token, user: { id: user.id, username: user.username, email: user.email, avatar_url: avatarUrl } });
   } catch (err) {
     console.error('OAuth error:', err);
     res.status(500).json({ error: 'OAuth authentication failed.' });

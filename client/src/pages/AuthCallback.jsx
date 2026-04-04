@@ -9,10 +9,14 @@ export default function AuthCallback() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const handleCallback = async () => {
-      const { data: { session } } = await supabase.auth.getSession();
+    let done = false;
 
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, session) => {
+      if (done) return;
       if (session?.access_token) {
+        done = true;
+        subscription.unsubscribe();
+        clearTimeout(fallbackTimer);
         try {
           const res = await api.post('/auth/oauth', { access_token: session.access_token });
           login(res.data.token, res.data.user);
@@ -20,12 +24,22 @@ export default function AuthCallback() {
         } catch {
           navigate('/login', { replace: true });
         }
-      } else {
+      }
+    });
+
+    // Fallback: if no session fires within 10s, redirect to login
+    const fallbackTimer = setTimeout(() => {
+      if (!done) {
+        done = true;
+        subscription.unsubscribe();
         navigate('/login', { replace: true });
       }
-    };
+    }, 10000);
 
-    handleCallback();
+    return () => {
+      subscription.unsubscribe();
+      clearTimeout(fallbackTimer);
+    };
   }, []);
 
   return (

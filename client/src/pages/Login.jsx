@@ -23,12 +23,10 @@ export default function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
-
     if (!email.trim() || !password) {
       setError('Please fill in all fields.');
       return;
     }
-
     setLoading(true);
     try {
       const res = await api.post('/auth/login', { email: email.trim(), password });
@@ -41,47 +39,50 @@ export default function Login() {
     }
   };
 
+  const labelStyle = {
+    fontFamily: "'Exo 2', sans-serif",
+    fontWeight: 600,
+    fontSize: '0.7rem',
+    color: 'rgba(255,255,255,0.5)',
+    display: 'block',
+    marginBottom: '8px',
+    letterSpacing: '0.08em',
+  };
+
   return (
-    <div
-      style={{
-        minHeight: 'calc(100vh - 68px)',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        padding: '32px 16px',
-      }}
-    >
-      <div
-        style={{
-          width: '100%',
-          maxWidth: '420px',
-          background: '#0d0d1a',
-          border: '4px solid #4CAF50',
-          boxShadow: '8px 8px 0px #2d7a2d',
-          padding: '32px',
-        }}
-      >
+    <div style={{
+      minHeight: 'calc(100vh - 60px)',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      padding: '32px 16px 100px',
+    }}>
+      <div className="glass-card" style={{
+        width: '100%',
+        maxWidth: '400px',
+        padding: '36px 32px',
+      }}>
         {/* Header */}
-        <div
-          style={{
-            borderBottom: '3px solid #4CAF50',
-            marginBottom: '28px',
-            paddingBottom: '16px',
-            textAlign: 'center',
-          }}
-        >
-          <div style={{ fontSize: '2rem', marginBottom: '8px' }}>⛏</div>
-          <h1
-            style={{
-              fontFamily: "'Press Start 2P', monospace",
-              fontSize: '1.1rem',
-              color: '#4CAF50',
-              margin: 0,
-              textShadow: '3px 3px 0px #2d7a2d',
-            }}
-          >
-            LOGIN
+        <div style={{ textAlign: 'center', marginBottom: '28px' }}>
+          <div style={{ fontSize: '2rem', marginBottom: '10px' }}>⛏</div>
+          <h1 style={{
+            fontFamily: "'Exo 2', sans-serif",
+            fontWeight: 800,
+            fontSize: '1.6rem',
+            color: 'white',
+            margin: 0,
+            letterSpacing: '0.06em',
+          }}>
+            WELCOME BACK
           </h1>
+          <p style={{
+            fontFamily: "'VT323', monospace",
+            fontSize: '1.1rem',
+            color: 'rgba(255,255,255,0.4)',
+            marginTop: '6px',
+          }}>
+            Sign in to your account
+          </p>
         </div>
 
         {error && (
@@ -90,20 +91,9 @@ export default function Login() {
           </div>
         )}
 
-        <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '18px' }}>
+        <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
           <div>
-            <label
-              htmlFor="email"
-              style={{
-                fontFamily: "'Press Start 2P', monospace",
-                fontSize: '0.55rem',
-                color: '#4CAF50',
-                display: 'block',
-                marginBottom: '8px',
-              }}
-            >
-              EMAIL
-            </label>
+            <label htmlFor="email" style={labelStyle}>EMAIL</label>
             <input
               id="email"
               type="email"
@@ -117,18 +107,7 @@ export default function Login() {
           </div>
 
           <div>
-            <label
-              htmlFor="password"
-              style={{
-                fontFamily: "'Press Start 2P', monospace",
-                fontSize: '0.55rem',
-                color: '#4CAF50',
-                display: 'block',
-                marginBottom: '8px',
-              }}
-            >
-              PASSWORD
-            </label>
+            <label htmlFor="password" style={labelStyle}>PASSWORD</label>
             <input
               id="password"
               type="password"
@@ -145,37 +124,31 @@ export default function Login() {
             type="submit"
             disabled={loading}
             style={{
-              background: loading ? '#2d7a2d' : '#4CAF50',
-              color: '#0d0d1a',
-              fontFamily: "'Press Start 2P', monospace",
-              fontSize: '0.7rem',
-              padding: '14px',
-              border: '3px solid #2d7a2d',
-              boxShadow: '4px 4px 0px #2d7a2d',
+              background: loading ? 'rgba(239,68,68,0.5)' : 'rgba(239,68,68,0.85)',
+              color: 'white',
+              fontFamily: "'Exo 2', sans-serif",
+              fontWeight: 700,
+              fontSize: '0.85rem',
+              padding: '13px',
+              border: '1px solid rgba(239,68,68,0.4)',
+              borderRadius: '8px',
               cursor: loading ? 'wait' : 'pointer',
-              marginTop: '8px',
-              transition: 'transform 0.1s, box-shadow 0.1s',
+              letterSpacing: '0.08em',
+              marginTop: '4px',
+              transition: 'background 0.2s',
             }}
-            onMouseEnter={(e) => {
-              if (!loading) {
-                e.currentTarget.style.transform = 'translate(-2px, -2px)';
-                e.currentTarget.style.boxShadow = '6px 6px 0px #2d7a2d';
-              }
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.transform = '';
-              e.currentTarget.style.boxShadow = '4px 4px 0px #2d7a2d';
-            }}
+            onMouseEnter={e => { if (!loading) e.currentTarget.style.background = 'rgba(239,68,68,1)'; }}
+            onMouseLeave={e => { if (!loading) e.currentTarget.style.background = 'rgba(239,68,68,0.85)'; }}
           >
-            {loading ? 'LOGGING IN...' : 'LOGIN'}
+            {loading ? 'SIGNING IN...' : 'LOGIN'}
           </button>
         </form>
 
         {/* Divider */}
         <div style={{ display: 'flex', alignItems: 'center', margin: '20px 0', gap: '10px' }}>
-          <div style={{ flex: 1, height: '2px', background: '#2a2a4a' }} />
-          <span style={{ fontFamily: "'VT323', monospace", fontSize: '1rem', color: '#555' }}>OR</span>
-          <div style={{ flex: 1, height: '2px', background: '#2a2a4a' }} />
+          <div style={{ flex: 1, height: '1px', background: 'rgba(255,255,255,0.08)' }} />
+          <span style={{ fontFamily: "'VT323', monospace", fontSize: '1rem', color: 'rgba(255,255,255,0.25)' }}>OR</span>
+          <div style={{ flex: 1, height: '1px', background: 'rgba(255,255,255,0.08)' }} />
         </div>
 
         {/* Google login */}
@@ -187,52 +160,46 @@ export default function Login() {
             alignItems: 'center',
             justifyContent: 'center',
             gap: '10px',
-            background: '#fff',
-            color: '#333',
-            fontFamily: "'Press Start 2P', monospace",
-            fontSize: '0.55rem',
+            background: 'rgba(255,255,255,0.06)',
+            color: 'rgba(255,255,255,0.85)',
+            fontFamily: "'Exo 2', sans-serif",
+            fontWeight: 600,
+            fontSize: '0.8rem',
             padding: '12px',
-            border: '3px solid #aaa',
-            boxShadow: '4px 4px 0px #888',
+            border: '1px solid rgba(255,255,255,0.1)',
+            borderRadius: '8px',
             cursor: 'pointer',
-            transition: 'transform 0.1s, box-shadow 0.1s',
+            letterSpacing: '0.06em',
+            transition: 'background 0.2s',
           }}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.transform = 'translate(-2px, -2px)';
-            e.currentTarget.style.boxShadow = '6px 6px 0px #888';
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.transform = '';
-            e.currentTarget.style.boxShadow = '4px 4px 0px #888';
-          }}
+          onMouseEnter={e => e.currentTarget.style.background = 'rgba(255,255,255,0.1)'}
+          onMouseLeave={e => e.currentTarget.style.background = 'rgba(255,255,255,0.06)'}
         >
           <img src="https://www.google.com/favicon.ico" alt="Google" style={{ width: '16px', height: '16px' }} />
-          LOGIN WITH GOOGLE
+          CONTINUE WITH GOOGLE
         </button>
 
-        <div
-          style={{
-            marginTop: '24px',
-            paddingTop: '20px',
-            borderTop: '2px solid #2a2a4a',
-            textAlign: 'center',
-          }}
-        >
-          <p style={{ fontFamily: "'VT323', monospace", fontSize: '1.2rem', color: '#888' }}>
-            No account yet?{' '}
-            <Link
-              to="/register"
-              style={{ color: '#4CAF50', textDecoration: 'none' }}
-              onMouseEnter={(e) => { e.currentTarget.style.color = '#FFD700'; }}
-              onMouseLeave={(e) => { e.currentTarget.style.color = '#4CAF50'; }}
-            >
-              REGISTER HERE
-            </Link>
-          </p>
-          <p style={{ fontFamily: "'VT323', monospace", fontSize: '1rem', color: '#555', marginTop: '8px' }}>
-            Demo: craftmaster@example.com / password123
-          </p>
-        </div>
+        <p style={{
+          fontFamily: "'VT323', monospace",
+          fontSize: '1.1rem',
+          color: 'rgba(255,255,255,0.35)',
+          textAlign: 'center',
+          marginTop: '20px',
+        }}>
+          No account?{' '}
+          <Link
+            to="/register"
+            style={{ color: '#f97316', textDecoration: 'none' }}
+            onMouseEnter={e => e.currentTarget.style.color = '#fb923c'}
+            onMouseLeave={e => e.currentTarget.style.color = '#f97316'}
+          >
+            REGISTER HERE
+          </Link>
+        </p>
+
+        <p style={{ fontFamily: "'VT323', monospace", fontSize: '0.85rem', color: 'rgba(255,255,255,0.18)', textAlign: 'center', marginTop: '8px' }}>
+          Demo: craftmaster@example.com / password123
+        </p>
       </div>
     </div>
   );
