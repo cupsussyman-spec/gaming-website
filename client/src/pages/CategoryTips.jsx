@@ -88,29 +88,30 @@ export default function CategoryTips() {
   }
 
   return (
-    <div style={{ paddingBottom: '80px', position: 'relative', minHeight: '100vh' }}>
+    <div style={{ position: 'relative', minHeight: '100vh' }}>
       {/* ── Full-page background ──────────────────────────── */}
       <div style={{
         position: 'fixed', inset: 0,
         backgroundImage: `url('${cfg.bgImage}')`,
         backgroundSize: 'cover',
         backgroundPosition: 'center 30%',
-        filter: 'blur(8px)',
-        opacity: 0.75,
+        filter: 'blur(6px)',
+        opacity: 0.9,
         zIndex: -2,
         transform: 'scale(1.05)',
       }} />
+      {/* Light dim so hero text is readable but image shows through */}
       <div style={{
         position: 'fixed', inset: 0,
-        background: cfg.overlay,
+        background: 'rgba(0,0,0,0.30)',
         zIndex: -1,
       }} />
 
-      {/* ── Hero header ──────────────────────────────────── */}
+      {/* ── Hero header — clear, image shows through ─────── */}
       <div style={{
         padding: '48px 24px 40px',
-        borderBottom: `1px solid ${cfg.color}25`,
-        marginBottom: '32px',
+        borderBottom: `1px solid rgba(255,255,255,0.08)`,
+        marginBottom: '0',
         position: 'relative',
       }}>
         <div style={{ maxWidth: '1100px', margin: '0 auto', position: 'relative', zIndex: 2 }}>
@@ -185,7 +186,16 @@ export default function CategoryTips() {
         </div>
       </div>
 
-      {/* ── Tips ─────────────────────────────────────────── */}
+      {/* ── Tips — glass panel ───────────────────────────── */}
+      <div style={{
+        background: 'rgba(8,6,16,0.72)',
+        backdropFilter: 'blur(20px)',
+        WebkitBackdropFilter: 'blur(20px)',
+        borderTop: `1px solid rgba(255,255,255,0.08)`,
+        paddingTop: '32px',
+        paddingBottom: '80px',
+        minHeight: '50vh',
+      }}>
       <div style={{ maxWidth: '1100px', margin: '0 auto', padding: '0 16px' }}>
         {/* Header row */}
         <div style={{
@@ -288,6 +298,7 @@ export default function CategoryTips() {
             />
           </div>
         )}
+      </div>
       </div>
     </div>
   );
