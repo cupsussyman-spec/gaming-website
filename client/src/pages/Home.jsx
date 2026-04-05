@@ -71,7 +71,23 @@ export default function Home() {
   const [expanded, setExpanded] = useState('');
 
   return (
-    <div style={{ minHeight: '100vh', paddingBottom: '80px' }}>
+    <div style={{ minHeight: '100vh', paddingBottom: '80px', position: 'relative' }}>
+      {/* ── Full-page water background ───────────────────── */}
+      <div style={{
+        position: 'fixed', inset: 0,
+        backgroundImage: "url('/home-bg.png')",
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        filter: 'blur(4px)',
+        transform: 'scale(1.05)',
+        opacity: 0.6,
+        zIndex: -2,
+      }} />
+      <div style={{
+        position: 'fixed', inset: 0,
+        background: 'rgba(3,3,8,0.55)',
+        zIndex: -1,
+      }} />
 
       {/* ── Hero ─────────────────────────────────────── */}
       <section style={{
