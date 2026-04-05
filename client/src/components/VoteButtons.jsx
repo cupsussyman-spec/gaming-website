@@ -57,6 +57,19 @@ export default function VoteButtons({ tipId, upVotes, downVotes, userVote: initi
   const upActive = userVote === 'up';
   const downActive = userVote === 'down';
 
+  const btnBase = {
+    display: 'flex', alignItems: 'center', gap: '6px',
+    padding: '6px 14px',
+    borderRadius: '8px',
+    cursor: loading ? 'wait' : 'pointer',
+    fontFamily: "'Exo 2', sans-serif",
+    fontWeight: 700,
+    fontSize: '0.82rem',
+    letterSpacing: '0.04em',
+    transition: 'background 0.2s, transform 0.15s, box-shadow 0.2s',
+    border: 'none',
+  };
+
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
       <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
@@ -64,80 +77,46 @@ export default function VoteButtons({ tipId, upVotes, downVotes, userVote: initi
           onClick={() => handleVote('up')}
           disabled={loading}
           style={{
-            fontFamily: "'VT323', monospace",
-            fontSize: '1.1rem',
-            padding: '4px 10px',
-            cursor: loading ? 'wait' : 'pointer',
-            border: `3px solid ${upActive ? '#4CAF50' : '#2d7a2d'}`,
-            background: upActive ? '#4CAF50' : '#0d0d1a',
-            color: upActive ? '#0d0d1a' : '#4CAF50',
-            boxShadow: upActive ? '3px 3px 0px #2d7a2d' : '2px 2px 0px #2d7a2d',
-            transition: 'transform 0.1s, box-shadow 0.1s',
-            display: 'flex',
-            alignItems: 'center',
-            gap: '4px',
+            ...btnBase,
+            background: upActive ? 'rgba(74,222,128,0.22)' : 'rgba(74,222,128,0.08)',
+            color: upActive ? '#4ade80' : 'rgba(74,222,128,0.7)',
+            boxShadow: upActive ? '0 0 10px rgba(74,222,128,0.25)' : 'none',
+            outline: `1px solid ${upActive ? 'rgba(74,222,128,0.5)' : 'rgba(74,222,128,0.2)'}`,
           }}
-          onMouseEnter={(e) => {
-            if (!loading) {
-              e.currentTarget.style.transform = 'translate(-1px, -1px)';
-              e.currentTarget.style.boxShadow = '4px 4px 0px #2d7a2d';
-            }
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.transform = '';
-            e.currentTarget.style.boxShadow = upActive ? '3px 3px 0px #2d7a2d' : '2px 2px 0px #2d7a2d';
-          }}
+          onMouseEnter={e => { if (!loading) e.currentTarget.style.background = 'rgba(74,222,128,0.16)'; }}
+          onMouseLeave={e => { e.currentTarget.style.background = upActive ? 'rgba(74,222,128,0.22)' : 'rgba(74,222,128,0.08)'; }}
           title="Upvote"
         >
-          ▲ UP {upCount}
+          👍 {upCount}
         </button>
 
         <button
           onClick={() => handleVote('down')}
           disabled={loading}
           style={{
-            fontFamily: "'VT323', monospace",
-            fontSize: '1.1rem',
-            padding: '4px 10px',
-            cursor: loading ? 'wait' : 'pointer',
-            border: `3px solid ${downActive ? '#ef4444' : '#991b1b'}`,
-            background: downActive ? '#ef4444' : '#0d0d1a',
-            color: downActive ? 'white' : '#ef4444',
-            boxShadow: downActive ? '3px 3px 0px #991b1b' : '2px 2px 0px #991b1b',
-            transition: 'transform 0.1s, box-shadow 0.1s',
-            display: 'flex',
-            alignItems: 'center',
-            gap: '4px',
+            ...btnBase,
+            background: downActive ? 'rgba(239,68,68,0.22)' : 'rgba(239,68,68,0.08)',
+            color: downActive ? '#f87171' : 'rgba(239,68,68,0.7)',
+            boxShadow: downActive ? '0 0 10px rgba(239,68,68,0.25)' : 'none',
+            outline: `1px solid ${downActive ? 'rgba(239,68,68,0.5)' : 'rgba(239,68,68,0.2)'}`,
           }}
-          onMouseEnter={(e) => {
-            if (!loading) {
-              e.currentTarget.style.transform = 'translate(-1px, -1px)';
-              e.currentTarget.style.boxShadow = '4px 4px 0px #991b1b';
-            }
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.transform = '';
-            e.currentTarget.style.boxShadow = downActive ? '3px 3px 0px #991b1b' : '2px 2px 0px #991b1b';
-          }}
+          onMouseEnter={e => { if (!loading) e.currentTarget.style.background = 'rgba(239,68,68,0.16)'; }}
+          onMouseLeave={e => { e.currentTarget.style.background = downActive ? 'rgba(239,68,68,0.22)' : 'rgba(239,68,68,0.08)'; }}
           title="Downvote"
         >
-          ▼ DOWN {downCount}
+          👎 {downCount}
         </button>
       </div>
 
       {loginMsg && (
-        <div
-          style={{
-            fontFamily: "'VT323', monospace",
-            fontSize: '1rem',
-            color: '#FFD700',
-            border: '2px solid #FFD700',
-            padding: '4px 8px',
-            background: 'rgba(255, 215, 0, 0.1)',
-          }}
-        >
-          LOGIN TO VOTE
-        </div>
+        <span style={{
+          fontFamily: "'VT323', monospace",
+          fontSize: '0.95rem',
+          color: '#fbbf24',
+          letterSpacing: '0.05em',
+        }}>
+          Login to vote
+        </span>
       )}
     </div>
   );
