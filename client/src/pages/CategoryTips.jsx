@@ -10,35 +10,40 @@ const CATEGORY_CONFIG = {
     icon: '⚡',
     desc: 'Circuits & Contraptions',
     blurb: 'Master the art of redstone engineering. From simple doors to complex computing machines.',
-    bg: 'radial-gradient(ellipse at 70% 50%, rgba(180,30,10,0.35) 0%, rgba(80,10,5,0.2) 55%, transparent 80%)',
+    bgImage: '/cat-redstone.png',
+    overlay: 'rgba(6,3,8,0.62)',
   },
   Combat: {
     color: '#8b5cf6',
     icon: '⚔',
     desc: 'PvP & PvE Tactics',
     blurb: 'Dominate every encounter. PvP strategies, mob tactics, and gear optimization.',
-    bg: 'radial-gradient(ellipse at 60% 40%, rgba(0,180,180,0.2) 0%, rgba(0,80,100,0.15) 55%, transparent 80%)',
+    bgImage: '/cat-combat.png',
+    overlay: 'rgba(4,2,12,0.60)',
   },
   Building: {
     color: '#22c55e',
     icon: '🏗',
     desc: 'Architecture & Design',
     blurb: 'Create stunning structures. Architecture tips, building techniques, and design inspiration.',
-    bg: 'radial-gradient(ellipse at 50% 50%, rgba(20,150,50,0.2) 0%, rgba(10,80,30,0.15) 55%, transparent 80%)',
+    bgImage: '/cat-building.png',
+    overlay: 'rgba(4,8,12,0.60)',
   },
   Farming: {
     color: '#84cc16',
     icon: '🌾',
     desc: 'Automation & Resources',
     blurb: 'Automate your resources. Efficient farms, crop mechanics, and mob grinding setups.',
-    bg: 'radial-gradient(ellipse at 40% 60%, rgba(100,180,0,0.2) 0%, rgba(50,90,0,0.15) 55%, transparent 80%)',
+    bgImage: '/cat-farming.png',
+    overlay: 'rgba(4,8,2,0.60)',
   },
   Survival: {
     color: '#f97316',
     icon: '🧭',
     desc: 'Exploration & Strategy',
     blurb: 'Explore and survive. Navigation, resource gathering, and base setup strategies.',
-    bg: 'radial-gradient(ellipse at 60% 40%, rgba(200,100,0,0.22) 0%, rgba(100,50,0,0.15) 55%, transparent 80%)',
+    bgImage: '/cat-survival.png',
+    overlay: 'rgba(10,4,2,0.60)',
   },
 };
 
@@ -87,12 +92,28 @@ export default function CategoryTips() {
       {/* ── Hero header ──────────────────────────────────── */}
       <div style={{
         padding: '48px 24px 40px',
-        background: cfg.bg,
         borderBottom: `1px solid ${cfg.color}25`,
         marginBottom: '32px',
         position: 'relative',
+        overflow: 'hidden',
       }}>
-        <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
+        {/* Background image */}
+        <div style={{
+          position: 'absolute', inset: '-8px',
+          backgroundImage: `url('${cfg.bgImage}')`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center 30%',
+          filter: 'blur(6px)',
+          opacity: 0.85,
+          zIndex: 0,
+        }} />
+        {/* Dark overlay */}
+        <div style={{
+          position: 'absolute', inset: 0,
+          background: cfg.overlay,
+          zIndex: 1,
+        }} />
+        <div style={{ maxWidth: '1100px', margin: '0 auto', position: 'relative', zIndex: 2 }}>
           {/* Back */}
           <Link to="/" style={{
             display: 'inline-flex',
