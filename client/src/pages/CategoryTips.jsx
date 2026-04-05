@@ -88,31 +88,31 @@ export default function CategoryTips() {
   }
 
   return (
-    <div style={{ paddingBottom: '80px' }}>
+    <div style={{ paddingBottom: '80px', position: 'relative', minHeight: '100vh' }}>
+      {/* ── Full-page background ──────────────────────────── */}
+      <div style={{
+        position: 'fixed', inset: 0,
+        backgroundImage: `url('${cfg.bgImage}')`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center 30%',
+        filter: 'blur(8px)',
+        opacity: 0.75,
+        zIndex: -2,
+        transform: 'scale(1.05)',
+      }} />
+      <div style={{
+        position: 'fixed', inset: 0,
+        background: cfg.overlay,
+        zIndex: -1,
+      }} />
+
       {/* ── Hero header ──────────────────────────────────── */}
       <div style={{
         padding: '48px 24px 40px',
         borderBottom: `1px solid ${cfg.color}25`,
         marginBottom: '32px',
         position: 'relative',
-        overflow: 'hidden',
       }}>
-        {/* Background image */}
-        <div style={{
-          position: 'absolute', inset: '-8px',
-          backgroundImage: `url('${cfg.bgImage}')`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center 30%',
-          filter: 'blur(6px)',
-          opacity: 0.85,
-          zIndex: 0,
-        }} />
-        {/* Dark overlay */}
-        <div style={{
-          position: 'absolute', inset: 0,
-          background: cfg.overlay,
-          zIndex: 1,
-        }} />
         <div style={{ maxWidth: '1100px', margin: '0 auto', position: 'relative', zIndex: 2 }}>
           {/* Back */}
           <Link to="/" style={{
