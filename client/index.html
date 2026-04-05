@@ -11,6 +11,20 @@
       rel="stylesheet"
     />
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⛏</text></svg>" />
+
+    <!-- Preload critical background images -->
+    <link rel="preload" as="image" href="/hero-bg.webp" />
+    <link rel="preload" as="image" href="/home-bg.webp" />
+    <link rel="preload" as="image" href="/cat-redstone.webp" />
+    <link rel="preload" as="image" href="/cat-combat.webp" />
+    <link rel="preload" as="image" href="/cat-building.webp" />
+    <link rel="preload" as="image" href="/cat-farming.webp" />
+    <link rel="preload" as="image" href="/cat-survival.webp" />
+
+    <style>
+      /* Instant dark background — no flash of white while JS loads */
+      html, body, #root { background: #050308; margin: 0; padding: 0; }
+    </style>
   </head>
   <body>
     <div id="root"></div>

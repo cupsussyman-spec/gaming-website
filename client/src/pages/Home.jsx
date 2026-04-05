@@ -10,7 +10,7 @@ const CATEGORIES = [
     icon: '⚡',
     desc: 'Circuits & Contraptions',
     blurb: 'Master the art of redstone engineering. From simple doors to complex computing machines.',
-    bgImage: '/cat-redstone.png',
+    bgImage: '/cat-redstone.webp',
     idleOverlay: 'rgba(6,3,8,0.45)',
     hoverOverlay: 'rgba(6,3,8,0.15)',
     colorTint: null,
@@ -22,7 +22,7 @@ const CATEGORIES = [
     icon: '⚔',
     desc: 'PvP & PvE Tactics',
     blurb: 'Dominate every encounter. PvP strategies, mob tactics, and gear optimization.',
-    bgImage: '/cat-combat.png',
+    bgImage: '/cat-combat.webp',
     idleOverlay: 'rgba(4,2,12,0.45)',
     hoverOverlay: 'rgba(4,2,12,0.15)',
     colorTint: 'rgba(30,100,110,0.25)',
@@ -34,7 +34,7 @@ const CATEGORIES = [
     icon: '🏗',
     desc: 'Architecture & Design',
     blurb: 'Transform blocks into breathtaking structures. From cottages to cathedrals.',
-    bgImage: '/cat-building.png',
+    bgImage: '/cat-building.webp',
     idleOverlay: 'rgba(4,8,12,0.45)',
     hoverOverlay: 'rgba(4,8,12,0.15)',
     colorTint: 'rgba(10,50,70,0.2)',
@@ -46,7 +46,7 @@ const CATEGORIES = [
     icon: '🌾',
     desc: 'Automation & Resources',
     blurb: 'Build efficient farms for every resource. Automate your way to abundance.',
-    bgImage: '/cat-farming.png',
+    bgImage: '/cat-farming.webp',
     idleOverlay: 'rgba(4,8,2,0.45)',
     hoverOverlay: 'rgba(4,8,2,0.15)',
     colorTint: 'rgba(80,100,5,0.2)',
@@ -58,7 +58,7 @@ const CATEGORIES = [
     icon: '🧭',
     desc: 'Exploration & Strategy',
     blurb: 'Survive and thrive in any biome. Essential knowledge for every adventurer.',
-    bgImage: '/cat-survival.png',
+    bgImage: '/cat-survival.webp',
     idleOverlay: 'rgba(10,4,2,0.45)',
     hoverOverlay: 'rgba(10,4,2,0.15)',
     colorTint: 'rgba(100,30,5,0.2)',
@@ -75,7 +75,7 @@ export default function Home() {
       {/* ── Full-page water background ───────────────────── */}
       <div style={{
         position: 'fixed', inset: 0,
-        backgroundImage: "url('/home-bg.png')",
+        backgroundImage: "url('/home-bg.webp')",
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         filter: 'blur(6px) saturate(0.5)',
@@ -113,7 +113,7 @@ export default function Home() {
             rgba(5,3,8,0.85) 85%,
             rgba(5,3,8,1) 100%
           ),
-          url('/hero-bg.png')
+          url('/hero-bg.webp')
         `,
         backgroundSize: 'cover',
         backgroundPosition: 'center 40%',
