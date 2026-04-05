@@ -6,6 +6,104 @@ const router = express.Router();
 
 const VALID_CATEGORIES = ['Survival', 'Redstone', 'Building', 'Combat', 'Farming'];
 
+// ── Minecraft content validator ──────────────────────────────────────────────
+const MC_KEYWORDS = [
+  // Core game
+  'minecraft','block','blocks','chunk','chunks','biome','biomes','world','server',
+  'survival','creative','hardcore','spectator','adventure',
+  // Dimensions
+  'overworld','nether','end','the end','nether portal','end portal',
+  // Mobs
+  'creeper','zombie','skeleton','spider','enderman','blaze','ghast','slime','witch',
+  'wither','ender dragon','pillager','ravager','phantom','drowned','husk','stray',
+  'vindicator','evoker','vex','guardian','elder guardian','shulker','hoglin','zoglin',
+  'piglin','strider','warden','allay','frog','axolotl','goat','bee','fox','wolf',
+  'villager','iron golem','snow golem','bat','cat','ocelot','parrot','dolphin',
+  'turtle','cod','salmon','squid','glow squid','panda','mooshroom','cow','pig',
+  'sheep','chicken','horse','donkey','mule','llama','rabbit','trader',
+  // Items & tools
+  'sword','pickaxe','axe','shovel','hoe','bow','crossbow','trident','shield',
+  'armor','helmet','chestplate','leggings','boots','elytra','totem',
+  'diamond','netherite','iron','gold','stone','wood','wooden','enchant','enchantment',
+  'mending','unbreaking','sharpness','fortune','silk touch','efficiency','protection',
+  'looting','knockback','thorns','feather falling','depth strider','frost walker',
+  'respiration','aqua affinity','infinity','power','punch','flame','smite',
+  'bane of arthropods','sweeping edge','fire aspect','looting','fortune',
+  // Blocks & materials
+  'cobblestone','obsidian','bedrock','gravel','sand','dirt','grass','log','plank',
+  'slab','stair','fence','glass','wool','concrete','terracotta','glazed',
+  'redstone','repeater','comparator','piston','sticky piston','hopper','dropper',
+  'dispenser','observer','lever','button','pressure plate','tripwire','daylight',
+  'furnace','blast furnace','smoker','crafting','anvil','enchanting','grindstone',
+  'smithing','stonecutter','loom','cartography','fletching','brewing stand',
+  'chest','shulker box','barrel','composter','beehive','bee nest',
+  'slime block','honey block','tnt','sculk','mangrove','cherry','bamboo',
+  'deepslate','calcite','tuff','dripstone','moss','glow lichen','amethyst',
+  // Gameplay mechanics
+  'xp','experience','level','spawn','respawn','death','hunger','saturation',
+  'healing','damage','knockback','critical hit','crit','combo','strafing',
+  'mining','smelting','crafting','brewing','trading','enchanting','repair',
+  'farm','farming','mob farm','xp farm','iron farm','gold farm','crop',
+  'wheat','carrot','potato','beetroot','sugarcane','melon','pumpkin','cactus',
+  'bamboo','kelp','nether wart','chorus','cocoa',
+  'redstone circuit','redstone clock','flying machine','piston door',
+  'item sorter','auto','automated','automation','contraption',
+  // Structures & locations
+  'dungeon','stronghold','mineshaft','village','mansion','temple','monument',
+  'outpost','bastion','fortress','nether fortress','end city','shipwreck',
+  'igloo','ruined portal','ancient city','trial chamber',
+  // Other mechanics
+  'spawn point','bed','respawn anchor','compass','map','banner','beacon',
+  'conduit','bell','lodestone','spyglass','bundle','book','enchanted book',
+  'golden apple','notch apple','potion','splash','lingering','arrow',
+  'firework','rocket','riptide','channeling','loyalty','impaling',
+  'swift sneak','soul speed','curse','mending','infinity',
+  'nether highway','portal','coordinate','y level','y-level','seed',
+  'chunk loading','tick','tps','lag','render distance','difficulty',
+  'peaceful','easy','normal','hard','hardmode','hardcore',
+  'op','operator','gamemode','command','cheat','gamerule',
+];
+
+const MC_SET = new Set(MC_KEYWORDS);
+
+function validateMinecraftTip(title, content) {
+  const text = `${title} ${content}`.toLowerCase();
+
+  // Check for gibberish: ratio of non-alpha characters too high
+  const alphaRatio = (text.match(/[a-z]/g) || []).length / text.length;
+  if (alphaRatio < 0.5) {
+    return 'Tip content appears to be gibberish. Please write a real Minecraft tip.';
+  }
+
+  // Check repeated characters (asdfasdf, aaaaa, etc.)
+  if (/(.)\1{6,}/.test(text) || /^[^a-z]*([a-z]{1,3}[^a-z]*){1,5}$/i.test(content.trim()) ) {
+    return 'Tip content does not look like a valid tip. Please describe a real Minecraft technique.';
+  }
+
+  // Must contain at least 2 distinct Minecraft keywords across title+content
+  const words = text.match(/\b[\w'-]+\b/g) || [];
+  const bigrams = [];
+  for (let i = 0; i < words.length - 1; i++) {
+    bigrams.push(`${words[i]} ${words[i+1]}`);
+  }
+  const allTokens = [...words, ...bigrams];
+  const hits = allTokens.filter(t => MC_SET.has(t));
+  const uniqueHits = new Set(hits);
+
+  if (uniqueHits.size < 2) {
+    return 'This tip does not seem to be about Minecraft. Please include specific Minecraft content (blocks, mobs, mechanics, etc.).';
+  }
+
+  // Check average word length — random keyboard spam has very short/long words
+  const wordList = content.trim().split(/\s+/);
+  const avgWordLen = wordList.reduce((s, w) => s + w.length, 0) / wordList.length;
+  if (avgWordLen < 2.5 || avgWordLen > 25) {
+    return 'Tip content does not appear to be valid text. Please write a clear, descriptive Minecraft tip.';
+  }
+
+  return null; // valid
+}
+
 // GET /api/tips
 router.get('/', async (req, res) => {
   const { category, sort = 'newest', page = 1 } = req.query;
@@ -78,6 +176,11 @@ router.post('/', authMiddleware, async (req, res) => {
     return res.status(400).json({ error: 'Content must be at least 50 characters long.' });
   }
 
+  const validationError = validateMinecraftTip(title.trim(), content.trim());
+  if (validationError) {
+    return res.status(400).json({ error: validationError });
+  }
+
   try {
     const { data: tip, error } = await supabase
       .from('tips')
@@ -108,6 +211,11 @@ router.put('/:id', authMiddleware, async (req, res) => {
   }
   if (!content || content.trim().length < 50) {
     return res.status(400).json({ error: 'Content must be at least 50 characters long.' });
+  }
+
+  const validationError = validateMinecraftTip(title.trim(), content.trim());
+  if (validationError) {
+    return res.status(400).json({ error: validationError });
   }
 
   try {
