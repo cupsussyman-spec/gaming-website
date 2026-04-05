@@ -1,8 +1,15 @@
 import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import TipCard from '../components/TipCard';
+import TipCard, { TIP_LEVEL_COLORS } from '../components/TipCard';
 import Pagination from '../components/Pagination';
 import api from '../api/axios';
+
+const LEVELS = [
+  { key: 'BEGINNER',       label: 'Beginner',       icon: '🌱' },
+  { key: 'BASIC',          label: 'Basic',           icon: '📘' },
+  { key: 'MOST IMPORTANT', label: 'Most Important',  icon: '⭐' },
+  { key: 'PRO TIP',        label: 'Pro Tip',         icon: '🔥' },
+];
 
 const CATEGORY_CONFIG = {
   Redstone: {
@@ -197,6 +204,33 @@ export default function CategoryTips() {
         minHeight: '50vh',
       }}>
       <div style={{ maxWidth: '1100px', margin: '0 auto', padding: '0 16px' }}>
+
+        {/* Level legend */}
+        <div style={{
+          display: 'flex', flexWrap: 'wrap', gap: '8px',
+          marginBottom: '20px', paddingTop: '4px',
+        }}>
+          {LEVELS.map(({ key, label, icon }) => {
+            const s = TIP_LEVEL_COLORS[key];
+            return (
+              <span key={key} style={{
+                display: 'inline-flex', alignItems: 'center', gap: '5px',
+                fontFamily: "'Exo 2', sans-serif",
+                fontWeight: 700,
+                fontSize: '0.68rem',
+                letterSpacing: '0.06em',
+                color: s.text,
+                background: s.bg,
+                border: `1px solid ${s.border}`,
+                padding: '4px 10px',
+                borderRadius: '6px',
+              }}>
+                {icon} {label}
+              </span>
+            );
+          })}
+        </div>
+
         {/* Header row */}
         <div style={{
           display: 'flex',

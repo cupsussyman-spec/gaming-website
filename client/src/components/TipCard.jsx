@@ -10,6 +10,21 @@ const CATEGORY_COLORS = {
   Survival: '#f97316',
 };
 
+export const TIP_LEVEL_COLORS = {
+  'BEGINNER':       { bg: 'rgba(34,197,94,0.15)',  border: 'rgba(34,197,94,0.4)',  text: '#4ade80' },
+  'BASIC':          { bg: 'rgba(56,189,248,0.15)', border: 'rgba(56,189,248,0.4)', text: '#38bdf8' },
+  'MOST IMPORTANT': { bg: 'rgba(251,191,36,0.15)', border: 'rgba(251,191,36,0.4)', text: '#fbbf24' },
+  'PRO TIP':        { bg: 'rgba(168,85,247,0.15)', border: 'rgba(168,85,247,0.4)', text: '#c084fc' },
+};
+
+const TAG_RE = /^\[(BEGINNER|BASIC|MOST IMPORTANT|PRO TIP)\]\s*/;
+
+function parseTitle(title) {
+  const m = title.match(TAG_RE);
+  if (!m) return { tag: null, clean: title };
+  return { tag: m[1], clean: title.slice(m[0].length) };
+}
+
 function formatDate(dateStr) {
   return new Date(dateStr).toLocaleDateString('en-US', {
     year: 'numeric', month: 'short', day: 'numeric',
@@ -23,24 +38,29 @@ export default function TipCard({ tip, showActions = false, onEdit, onDelete, us
   const truncated = content.length > 160 ? content.slice(0, 160) + '...' : content;
   const needsTruncation = content.length > 160;
   const color = CATEGORY_COLORS[tip.category] || '#fff';
+  const { tag, clean } = parseTitle(tip.title);
+  const levelStyle = tag ? TIP_LEVEL_COLORS[tag] : null;
 
   return (
     <div className="tip-card" style={{
       borderLeft: `2px solid ${color}40`,
     }}>
-      {/* Category badge + title */}
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '10px' }}>
-        <h3 style={{
-          fontFamily: "'Exo 2', sans-serif",
-          fontWeight: 700,
-          fontSize: '0.9rem',
-          color: 'white',
-          lineHeight: 1.4,
-          flex: 1,
-          margin: 0,
-        }}>
-          {tip.title}
-        </h3>
+      {/* Level tag + category badge row */}
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '8px' }}>
+        {levelStyle ? (
+          <span style={{
+            fontFamily: "'Exo 2', sans-serif",
+            fontWeight: 700,
+            fontSize: '0.62rem',
+            letterSpacing: '0.08em',
+            color: levelStyle.text,
+            background: levelStyle.bg,
+            border: `1px solid ${levelStyle.border}`,
+            padding: '2px 8px',
+            borderRadius: '4px',
+            whiteSpace: 'nowrap',
+          }}>{tag}</span>
+        ) : <span />}
         <span style={{
           fontFamily: "'Exo 2', sans-serif",
           fontWeight: 700,
@@ -48,7 +68,7 @@ export default function TipCard({ tip, showActions = false, onEdit, onDelete, us
           color: color,
           background: `${color}18`,
           border: `1px solid ${color}40`,
-          padding: '3px 8px',
+          padding: '2px 8px',
           borderRadius: '4px',
           whiteSpace: 'nowrap',
           letterSpacing: '0.06em',
@@ -57,6 +77,18 @@ export default function TipCard({ tip, showActions = false, onEdit, onDelete, us
           {tip.category?.toUpperCase()}
         </span>
       </div>
+
+      {/* Title */}
+      <h3 style={{
+        fontFamily: "'Exo 2', sans-serif",
+        fontWeight: 700,
+        fontSize: '0.9rem',
+        color: 'white',
+        lineHeight: 1.4,
+        margin: 0,
+      }}>
+        {clean}
+      </h3>
 
       {/* Content */}
       <p style={{
