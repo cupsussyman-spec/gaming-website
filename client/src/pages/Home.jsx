@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const WISDOM_COLORS = ['#ef4444', '#ec4899', '#a855f7', '#8b5cf6', '#84cc16', '#22c55e'];
+const WISDOM_COLORS = ['#ef4444', '#f25c2a', '#f97316', '#fbbf24', '#f97316', '#ef4444'];
 
 const CATEGORIES = [
   {

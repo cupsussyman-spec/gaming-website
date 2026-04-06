@@ -7,14 +7,11 @@ export default function Modal({ isOpen, onClose, title, children }) {
     const handleEscape = (e) => {
       if (e.key === 'Escape') onClose();
     };
-
     if (isOpen) {
       document.addEventListener('keydown', handleEscape);
       document.body.style.overflow = 'hidden';
-      // Focus the modal
       setTimeout(() => modalRef.current?.focus(), 0);
     }
-
     return () => {
       document.removeEventListener('keydown', handleEscape);
       document.body.style.overflow = '';
@@ -28,85 +25,80 @@ export default function Modal({ isOpen, onClose, title, children }) {
       style={{
         position: 'fixed',
         inset: 0,
-        backgroundColor: 'rgba(0, 0, 0, 0.85)',
+        backgroundColor: 'rgba(0,0,0,0.75)',
+        backdropFilter: 'blur(6px)',
+        WebkitBackdropFilter: 'blur(6px)',
         zIndex: 1000,
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
         padding: '16px',
       }}
-      onClick={(e) => {
-        if (e.target === e.currentTarget) onClose();
-      }}
+      onClick={(e) => { if (e.target === e.currentTarget) onClose(); }}
     >
       <div
         ref={modalRef}
         tabIndex={-1}
         style={{
-          background: '#1a1a2e',
-          border: '4px solid #4CAF50',
-          boxShadow: '8px 8px 0px #2d7a2d',
+          background: 'rgba(10,7,16,0.97)',
+          border: '1px solid rgba(255,255,255,0.1)',
+          borderRadius: '14px',
           width: '100%',
-          maxWidth: '600px',
+          maxWidth: '580px',
           maxHeight: '90vh',
           overflow: 'auto',
           outline: 'none',
+          boxShadow: '0 24px 80px rgba(0,0,0,0.7)',
         }}
       >
         {/* Title bar */}
-        <div
-          style={{
-            background: '#0d0d1a',
-            borderBottom: '4px solid #4CAF50',
-            padding: '12px 16px',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-          }}
-        >
-          <h2
-            style={{
-              fontFamily: "'Press Start 2P', monospace",
-              fontSize: '0.75rem',
-              color: '#4CAF50',
-              margin: 0,
-            }}
-          >
+        <div style={{
+          padding: '16px 20px',
+          borderBottom: '1px solid rgba(255,255,255,0.08)',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          background: 'rgba(255,255,255,0.03)',
+        }}>
+          <h2 style={{
+            fontFamily: "'Exo 2', sans-serif",
+            fontWeight: 700,
+            fontSize: '0.85rem',
+            color: 'rgba(255,255,255,0.9)',
+            margin: 0,
+            letterSpacing: '0.08em',
+          }}>
             {title}
           </h2>
           <button
             onClick={onClose}
+            aria-label="Close modal"
             style={{
-              background: '#ef4444',
-              border: '2px solid #991b1b',
-              color: 'white',
+              background: 'rgba(255,255,255,0.07)',
+              border: '1px solid rgba(255,255,255,0.1)',
+              borderRadius: '6px',
+              color: 'rgba(255,255,255,0.5)',
               width: '28px',
               height: '28px',
               cursor: 'pointer',
-              fontFamily: "'Press Start 2P', monospace",
-              fontSize: '0.6rem',
+              fontFamily: "'Exo 2', sans-serif",
+              fontWeight: 700,
+              fontSize: '0.75rem',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              boxShadow: '2px 2px 0px #991b1b',
               flexShrink: 0,
+              transition: 'background 0.15s, color 0.15s',
             }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.transform = 'translate(-1px, -1px)';
-              e.currentTarget.style.boxShadow = '3px 3px 0px #991b1b';
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.transform = '';
-              e.currentTarget.style.boxShadow = '2px 2px 0px #991b1b';
-            }}
-            aria-label="Close modal"
+            onMouseEnter={e => { e.currentTarget.style.background = 'rgba(239,68,68,0.2)'; e.currentTarget.style.color = '#f87171'; }}
+            onMouseLeave={e => { e.currentTarget.style.background = 'rgba(255,255,255,0.07)'; e.currentTarget.style.color = 'rgba(255,255,255,0.5)'; }}
           >
-            X
+            ✕
           </button>
         </div>
 
         {/* Content */}
-        <div style={{ padding: '20px' }}>
+        <div style={{ padding: '24px 20px' }}>
           {children}
         </div>
       </div>

@@ -3,49 +3,62 @@ export default function AlertBox({ message, type = 'error' }) {
 
   const styles = {
     error: {
-      border: '4px solid #ef4444',
-      boxShadow: '4px 4px 0px #991b1b',
-      background: 'rgba(239, 68, 68, 0.1)',
-      icon: '✗',
-      iconColor: '#ef4444',
+      border: '1px solid rgba(239,68,68,0.35)',
+      background: 'rgba(239,68,68,0.08)',
+      icon: '✕',
+      iconColor: '#f87171',
+      textColor: 'rgba(255,255,255,0.8)',
     },
     success: {
-      border: '4px solid #4CAF50',
-      boxShadow: '4px 4px 0px #2d7a2d',
-      background: 'rgba(76, 175, 80, 0.1)',
+      border: '1px solid rgba(74,222,128,0.35)',
+      background: 'rgba(74,222,128,0.07)',
       icon: '✓',
-      iconColor: '#4CAF50',
+      iconColor: '#4ade80',
+      textColor: 'rgba(255,255,255,0.8)',
     },
     warning: {
-      border: '4px solid #FFD700',
-      boxShadow: '4px 4px 0px #b8960c',
-      background: 'rgba(255, 215, 0, 0.1)',
+      border: '1px solid rgba(251,191,36,0.35)',
+      background: 'rgba(251,191,36,0.07)',
       icon: '!',
-      iconColor: '#FFD700',
+      iconColor: '#fbbf24',
+      textColor: 'rgba(255,255,255,0.8)',
     },
   };
 
-  const style = styles[type] || styles.error;
+  const s = styles[type] || styles.error;
 
   return (
     <div
+      role="alert"
       style={{
-        border: style.border,
-        boxShadow: style.boxShadow,
-        background: style.background,
-        padding: '12px 16px',
+        border: s.border,
+        background: s.background,
+        borderRadius: '8px',
+        padding: '11px 14px',
         display: 'flex',
         alignItems: 'flex-start',
         gap: '10px',
-        fontFamily: "'VT323', monospace",
-        fontSize: '1.1rem',
       }}
-      role="alert"
     >
-      <span style={{ color: style.iconColor, fontWeight: 'bold', fontSize: '1.3rem', lineHeight: 1 }}>
-        [{style.icon}]
+      <span style={{
+        color: s.iconColor,
+        fontFamily: "'Exo 2', sans-serif",
+        fontWeight: 700,
+        fontSize: '0.8rem',
+        lineHeight: '1.5',
+        flexShrink: 0,
+      }}>
+        {s.icon}
       </span>
-      <span>{message}</span>
+      <span style={{
+        fontFamily: "'Exo 2', sans-serif",
+        fontWeight: 500,
+        fontSize: '0.82rem',
+        color: s.textColor,
+        lineHeight: 1.5,
+      }}>
+        {message}
+      </span>
     </div>
   );
 }

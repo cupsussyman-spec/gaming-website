@@ -1,10 +1,11 @@
 import { useState, useRef, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 
 export default function Navbar() {
   const { user, isAuthenticated, logout } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
   const [profileOpen, setProfileOpen] = useState(false);
   const dropdownRef = useRef(null);
 
@@ -66,16 +67,18 @@ export default function Navbar() {
           alignItems: 'center',
           gap: '8px',
         }}>
-          <span style={{ color: '#ef4444' }}>⛏</span>
-          CRAFT<span style={{ color: '#f97316' }}>WISDOM</span>
+          <span style={{ color: '#ef4444', fontSize: '1rem' }}>⛏</span>
+          <span>CRAFT</span><span style={{ color: '#f97316' }}>WISDOM</span>
         </Link>
 
         {/* Desktop nav links */}
         <div style={{ alignItems: 'center', gap: '28px' }} className="nav-desktop">
-          <Link to="/" style={linkStyle}
-            onMouseEnter={e => e.currentTarget.style.color = 'white'}
-            onMouseLeave={e => e.currentTarget.style.color = 'rgba(255,255,255,0.7)'}
-          >HOME</Link>
+          {location.pathname !== '/' && (
+            <Link to="/" style={linkStyle}
+              onMouseEnter={e => e.currentTarget.style.color = 'white'}
+              onMouseLeave={e => e.currentTarget.style.color = 'rgba(255,255,255,0.7)'}
+            >HOME</Link>
+          )}
           <Link to="/submit" style={linkStyle}
             onMouseEnter={e => e.currentTarget.style.color = 'white'}
             onMouseLeave={e => e.currentTarget.style.color = 'rgba(255,255,255,0.7)'}

@@ -8,12 +8,12 @@ html {
 }
 
 body {
-  background-color: #080608;
+  background-color: #07050a;
   background-image:
-    radial-gradient(ellipse 160% 30% at 55% 0%,
-      rgba(70, 28, 6, 0.85) 0%,
-      rgba(30, 10, 3, 0.5) 30%,
-      transparent 60%);
+    radial-gradient(ellipse 180% 25% at 60% 0%,
+      rgba(80, 22, 6, 0.7) 0%,
+      rgba(30, 10, 3, 0.4) 35%,
+      transparent 65%);
   background-attachment: fixed;
   font-family: 'VT323', monospace;
   color: white;
@@ -51,220 +51,176 @@ body {
 
 /* ─── Glass card ─────────────────────────────────────────────── */
 .glass-card {
-  background: rgba(255, 255, 255, 0.04);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.045);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 14px;
+  box-shadow: 0 4px 32px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.07);
 }
 
-/* ─── Category card ──────────────────────────────────────────── */
-.category-card {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  padding: 14px 20px;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.07);
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background 0.2s, border-color 0.2s, transform 0.15s;
-  text-decoration: none;
-  color: white;
-}
-
-.category-card:hover {
-  background: rgba(255, 255, 255, 0.09);
-  border-color: rgba(255, 255, 255, 0.14);
-  transform: translateX(6px);
-}
-
-.category-card.active {
-  background: rgba(255, 255, 255, 0.1);
-  border-color: rgba(255, 255, 255, 0.2);
-}
-
-/* ─── Tip card (new style) ───────────────────────────────────── */
+/* ─── Tip card ───────────────────────────────────────────────── */
 .tip-card {
-  background: rgba(255, 255, 255, 0.06);
+  background: rgba(255, 255, 255, 0.055);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.11);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 14px;
   padding: 20px;
   display: flex;
   flex-direction: column;
   gap: 14px;
   transition: background 0.25s, border-color 0.25s, transform 0.2s, box-shadow 0.25s;
-  box-shadow: 0 2px 16px rgba(0,0,0,0.25), inset 0 1px 0 rgba(255,255,255,0.08);
+  box-shadow: 0 2px 16px rgba(0,0,0,0.28), inset 0 1px 0 rgba(255,255,255,0.07);
 }
 
 .tip-card:hover {
-  background: rgba(255, 255, 255, 0.10);
-  border-color: rgba(255, 255, 255, 0.18);
+  background: rgba(255, 255, 255, 0.09);
+  border-color: rgba(255, 255, 255, 0.16);
   transform: translateY(-3px);
-  box-shadow: 0 8px 28px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.12);
+  box-shadow: 0 10px 32px rgba(0,0,0,0.38), inset 0 1px 0 rgba(255,255,255,0.10);
 }
 
-/* ─── Legacy pixel classes (kept for Profile/Submit/Modal) ───── */
-.pixel-box {
-  border: 2px solid rgba(76, 175, 80, 0.5);
-  background: rgba(76, 175, 80, 0.05);
-  border-radius: 6px;
+/* ─── Form inputs ────────────────────────────────────────────── */
+.pixel-input {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.05);
+  color: white;
+  padding: 11px 14px;
+  font-family: 'Exo 2', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 500;
+  outline: none;
+  width: 100%;
+  border-radius: 8px;
+  transition: border-color 0.2s, background 0.2s;
 }
 
-.pixel-box-gold {
-  border: 2px solid rgba(255, 215, 0, 0.5);
-  background: rgba(255, 215, 0, 0.05);
-  border-radius: 6px;
+.pixel-input:focus {
+  border-color: rgba(239, 68, 68, 0.55);
+  background: rgba(255, 255, 255, 0.07);
 }
 
-.pixel-box-red {
-  border: 2px solid rgba(239, 68, 68, 0.5);
-  background: rgba(239, 68, 68, 0.05);
-  border-radius: 6px;
+.pixel-input::placeholder {
+  color: rgba(255, 255, 255, 0.22);
 }
 
+.pixel-select {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.05);
+  color: white;
+  padding: 11px 14px;
+  font-family: 'Exo 2', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 500;
+  outline: none;
+  width: 100%;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  border-radius: 8px;
+  transition: border-color 0.2s;
+}
+
+.pixel-select:focus {
+  border-color: rgba(239, 68, 68, 0.55);
+}
+
+.pixel-select option {
+  background: #120d1a;
+  color: white;
+}
+
+.pixel-textarea {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.05);
+  color: white;
+  padding: 11px 14px;
+  font-family: 'Exo 2', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 500;
+  outline: none;
+  width: 100%;
+  resize: vertical;
+  min-height: 150px;
+  border-radius: 8px;
+  line-height: 1.6;
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.pixel-textarea:focus {
+  border-color: rgba(239, 68, 68, 0.55);
+  background: rgba(255, 255, 255, 0.07);
+}
+
+.pixel-textarea::placeholder {
+  color: rgba(255, 255, 255, 0.22);
+}
+
+/* ─── Button utilities ───────────────────────────────────────── */
 .pixel-btn {
-  border: 1px solid rgba(76, 175, 80, 0.5);
-  background: rgba(76, 175, 80, 0.08);
-  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 8px;
   transition: background 0.15s, border-color 0.15s;
   cursor: pointer;
 }
 
 .pixel-btn:hover {
-  background: rgba(76, 175, 80, 0.18);
-  border-color: rgba(76, 175, 80, 0.8);
-}
-
-.pixel-btn:active {
-  background: rgba(76, 175, 80, 0.25);
+  background: rgba(255, 255, 255, 0.10);
+  border-color: rgba(255, 255, 255, 0.22);
 }
 
 .pixel-btn-gold {
-  border: 1px solid rgba(255, 215, 0, 0.5);
-  background: rgba(255, 215, 0, 0.07);
-  border-radius: 6px;
+  border: 1px solid rgba(251, 191, 36, 0.35);
+  background: rgba(251, 191, 36, 0.07);
+  border-radius: 8px;
   transition: background 0.15s, border-color 0.15s;
   cursor: pointer;
 }
 
 .pixel-btn-gold:hover {
-  background: rgba(255, 215, 0, 0.18);
-  border-color: rgba(255, 215, 0, 0.8);
+  background: rgba(251, 191, 36, 0.15);
+  border-color: rgba(251, 191, 36, 0.6);
 }
 
 .pixel-btn-red {
-  border: 1px solid rgba(239, 68, 68, 0.5);
-  background: rgba(239, 68, 68, 0.07);
-  border-radius: 6px;
+  border: 1px solid rgba(239, 68, 68, 0.4);
+  background: rgba(239, 68, 68, 0.08);
+  border-radius: 8px;
   transition: background 0.15s, border-color 0.15s;
   cursor: pointer;
 }
 
 .pixel-btn-red:hover {
   background: rgba(239, 68, 68, 0.18);
-  border-color: rgba(239, 68, 68, 0.8);
-}
-
-.pixel-input {
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  background: rgba(255, 255, 255, 0.05);
-  color: white;
-  padding: 10px 14px;
-  font-family: 'VT323', monospace;
-  font-size: 1.2rem;
-  outline: none;
-  width: 100%;
-  border-radius: 6px;
-  transition: border-color 0.2s;
-}
-
-.pixel-input:focus {
-  border-color: rgba(76, 175, 80, 0.6);
-  background: rgba(255, 255, 255, 0.07);
-}
-
-.pixel-input::placeholder {
-  color: rgba(255, 255, 255, 0.25);
-}
-
-.pixel-select {
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  background: rgba(255, 255, 255, 0.05);
-  color: white;
-  padding: 10px 14px;
-  font-family: 'VT323', monospace;
-  font-size: 1.2rem;
-  outline: none;
-  width: 100%;
-  cursor: pointer;
-  appearance: none;
-  -webkit-appearance: none;
-  border-radius: 6px;
-}
-
-.pixel-select:focus {
-  border-color: rgba(76, 175, 80, 0.6);
-}
-
-.pixel-select option {
-  background: #1a1025;
-  color: white;
-}
-
-.pixel-textarea {
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  background: rgba(255, 255, 255, 0.05);
-  color: white;
-  padding: 10px 14px;
-  font-family: 'VT323', monospace;
-  font-size: 1.2rem;
-  outline: none;
-  width: 100%;
-  resize: vertical;
-  min-height: 150px;
-  border-radius: 6px;
-}
-
-.pixel-textarea:focus {
-  border-color: rgba(76, 175, 80, 0.6);
+  border-color: rgba(239, 68, 68, 0.7);
 }
 
 /* ─── Scrollbar ──────────────────────────────────────────────── */
 ::-webkit-scrollbar {
-  width: 6px;
+  width: 5px;
 }
 
 ::-webkit-scrollbar-track {
-  background: rgba(0, 0, 0, 0.3);
+  background: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.12);
   border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.25);
+  background: rgba(255, 255, 255, 0.22);
 }
 
 /* ─── Animations ─────────────────────────────────────────────── */
-@keyframes blink {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0; }
-}
-
-.blink {
-  animation: blink 1s step-end infinite;
-}
-
 @keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(20px); }
+  from { opacity: 0; transform: translateY(16px); }
   to   { opacity: 1; transform: translateY(0); }
 }
 
 .fade-in-up {
-  animation: fadeInUp 0.5s ease forwards;
+  animation: fadeInUp 0.45s ease forwards;
 }

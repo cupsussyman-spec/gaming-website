@@ -7,6 +7,24 @@ import TipCard from '../components/TipCard';
 
 const CATEGORIES = ['Survival', 'Redstone', 'Building', 'Combat', 'Farming'];
 
+const CATEGORY_COLORS = {
+  Survival: '#f97316',
+  Redstone: '#ef4444',
+  Building: '#22c55e',
+  Combat: '#8b5cf6',
+  Farming: '#84cc16',
+};
+
+const labelStyle = {
+  fontFamily: "'Exo 2', sans-serif",
+  fontWeight: 600,
+  fontSize: '0.7rem',
+  color: 'rgba(255,255,255,0.45)',
+  display: 'block',
+  marginBottom: '8px',
+  letterSpacing: '0.1em',
+};
+
 export default function Submit() {
   const { user } = useAuth();
   const navigate = useNavigate();
@@ -22,20 +40,12 @@ export default function Submit() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
-
-    if (!title.trim()) {
-      setError('Title is required.');
-      return;
-    }
-    if (!category) {
-      setError('Please select a category.');
-      return;
-    }
+    if (!title.trim()) { setError('Title is required.'); return; }
+    if (!category) { setError('Please select a category.'); return; }
     if (content.trim().length < 50) {
       setError(`Content must be at least 50 characters (currently ${content.trim().length}).`);
       return;
     }
-
     setLoading(true);
     try {
       await api.post('/tips', {
@@ -64,42 +74,41 @@ export default function Submit() {
     created_at: new Date().toISOString(),
   };
 
-  const labelStyle = {
-    fontFamily: "'Press Start 2P', monospace",
-    fontSize: '0.55rem',
-    color: '#4CAF50',
-    display: 'block',
-    marginBottom: '8px',
-  };
+  const accentColor = CATEGORY_COLORS[category] || '#ef4444';
 
   return (
-    <div style={{ maxWidth: '800px', margin: '0 auto', padding: '32px 16px' }}>
+    <div style={{ maxWidth: '760px', margin: '0 auto', padding: '40px 16px 100px' }}>
       {/* Header */}
-      <div style={{ marginBottom: '32px', textAlign: 'center' }}>
-        <h1
-          style={{
-            fontFamily: "'Press Start 2P', monospace",
-            fontSize: 'clamp(0.8rem, 3vw, 1.4rem)',
-            color: '#4CAF50',
-            textShadow: '4px 4px 0px #2d7a2d',
-            marginBottom: '8px',
-          }}
-        >
-          SUBMIT TIP
+      <div style={{ marginBottom: '32px' }}>
+        <p style={{
+          fontFamily: "'VT323', monospace",
+          fontSize: '0.8rem',
+          color: 'rgba(255,255,255,0.25)',
+          letterSpacing: '0.18em',
+          marginBottom: '10px',
+        }}>// SUBMIT_TIP</p>
+        <h1 style={{
+          fontFamily: "'Exo 2', sans-serif",
+          fontWeight: 800,
+          fontSize: 'clamp(1.6rem, 5vw, 2.4rem)',
+          color: 'white',
+          margin: 0,
+          letterSpacing: '0.04em',
+        }}>
+          Share Your Knowledge
         </h1>
-        <p style={{ fontFamily: "'VT323', monospace", fontSize: '1.3rem', color: '#888' }}>
-          Share your Minecraft knowledge with the community
+        <p style={{
+          fontFamily: "'VT323', monospace",
+          fontSize: '1.1rem',
+          color: 'rgba(255,255,255,0.38)',
+          marginTop: '6px',
+        }}>
+          Help the community master Minecraft
         </p>
       </div>
 
-      <div
-        style={{
-          background: '#0d0d1a',
-          border: '4px solid #4CAF50',
-          boxShadow: '6px 6px 0px #2d7a2d',
-          padding: '28px',
-        }}
-      >
+      {/* Form card */}
+      <div className="glass-card" style={{ padding: '28px 24px' }}>
         {error && (
           <div style={{ marginBottom: '20px' }}>
             <AlertBox message={error} type="error" />
@@ -109,9 +118,7 @@ export default function Submit() {
         <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
           {/* Title */}
           <div>
-            <label htmlFor="title" style={labelStyle}>
-              TIP TITLE
-            </label>
+            <label htmlFor="title" style={labelStyle}>TIP TITLE</label>
             <input
               id="title"
               type="text"
@@ -122,16 +129,19 @@ export default function Submit() {
               disabled={loading}
               maxLength={100}
             />
-            <div style={{ fontFamily: "'VT323', monospace", fontSize: '0.9rem', color: '#555', marginTop: '4px' }}>
-              {title.length}/100 characters
+            <div style={{
+              fontFamily: "'Exo 2', sans-serif",
+              fontSize: '0.7rem',
+              color: 'rgba(255,255,255,0.22)',
+              marginTop: '5px',
+            }}>
+              {title.length}/100
             </div>
           </div>
 
           {/* Category */}
           <div>
-            <label htmlFor="category" style={labelStyle}>
-              CATEGORY
-            </label>
+            <label htmlFor="category" style={labelStyle}>CATEGORY</label>
             <div style={{ position: 'relative' }}>
               <select
                 id="category"
@@ -140,35 +150,26 @@ export default function Submit() {
                 className="pixel-select"
                 disabled={loading}
               >
-                <option value="">-- SELECT CATEGORY --</option>
+                <option value="">— Select category —</option>
                 {CATEGORIES.map((cat) => (
-                  <option key={cat} value={cat}>
-                    {cat}
-                  </option>
+                  <option key={cat} value={cat}>{cat}</option>
                 ))}
               </select>
-              <div
-                style={{
-                  position: 'absolute',
-                  right: '12px',
-                  top: '50%',
-                  transform: 'translateY(-50%)',
-                  color: '#4CAF50',
-                  pointerEvents: 'none',
-                  fontFamily: "'VT323', monospace",
-                  fontSize: '1.2rem',
-                }}
-              >
-                ▼
-              </div>
+              <span style={{
+                position: 'absolute',
+                right: '14px',
+                top: '50%',
+                transform: 'translateY(-50%)',
+                color: 'rgba(255,255,255,0.3)',
+                pointerEvents: 'none',
+                fontSize: '0.7rem',
+              }}>▾</span>
             </div>
           </div>
 
           {/* Content */}
           <div>
-            <label htmlFor="content" style={labelStyle}>
-              TIP CONTENT
-            </label>
+            <label htmlFor="content" style={labelStyle}>TIP CONTENT</label>
             <textarea
               id="content"
               value={content}
@@ -176,34 +177,30 @@ export default function Submit() {
               className="pixel-textarea"
               placeholder="Describe your tip in detail. Share the what, why, and how..."
               disabled={loading}
-              rows={8}
+              rows={7}
             />
-            <div
-              style={{
-                fontFamily: "'VT323', monospace",
-                fontSize: '1rem',
-                color: content.trim().length < 50 ? '#ef4444' : '#4CAF50',
-                marginTop: '4px',
-                display: 'flex',
-                justifyContent: 'space-between',
-              }}
-            >
+            <div style={{
+              fontFamily: "'Exo 2', sans-serif",
+              fontSize: '0.7rem',
+              color: content.trim().length < 50 ? 'rgba(239,68,68,0.7)' : 'rgba(74,222,128,0.7)',
+              marginTop: '5px',
+              display: 'flex',
+              justifyContent: 'space-between',
+            }}>
               <span>
                 {content.trim().length < 50
-                  ? `Need ${50 - content.trim().length} more characters`
+                  ? `${50 - content.trim().length} more characters needed`
                   : 'Minimum length reached ✓'}
               </span>
-              <span style={{ color: '#666' }}>{content.length} chars</span>
+              <span style={{ color: 'rgba(255,255,255,0.2)' }}>{content.length} chars</span>
             </div>
           </div>
 
           {/* YouTube URL */}
           <div>
             <label htmlFor="youtube" style={labelStyle}>
-              YOUTUBE URL{' '}
-              <span style={{ color: '#666', fontFamily: "'VT323', monospace", fontSize: '0.9rem' }}>
-                (OPTIONAL)
-              </span>
+              YOUTUBE URL
+              <span style={{ color: 'rgba(255,255,255,0.2)', fontWeight: 400, marginLeft: '6px' }}>optional</span>
             </label>
             <input
               id="youtube"
@@ -216,18 +213,19 @@ export default function Submit() {
             />
           </div>
 
-          {/* Buttons */}
-          <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
+          {/* Actions */}
+          <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap', paddingTop: '4px' }}>
             <button
               type="button"
               onClick={() => setShowPreview(!showPreview)}
               className="pixel-btn-gold"
               style={{
-                background: 'transparent',
-                color: '#FFD700',
-                fontFamily: "'Press Start 2P', monospace",
-                fontSize: '0.6rem',
-                padding: '12px 20px',
+                color: '#fbbf24',
+                fontFamily: "'Exo 2', sans-serif",
+                fontWeight: 700,
+                fontSize: '0.78rem',
+                padding: '11px 20px',
+                letterSpacing: '0.06em',
               }}
             >
               {showPreview ? 'HIDE PREVIEW' : 'PREVIEW'}
@@ -237,27 +235,21 @@ export default function Submit() {
               type="submit"
               disabled={loading}
               style={{
-                background: loading ? '#2d7a2d' : '#4CAF50',
-                color: '#0d0d1a',
-                fontFamily: "'Press Start 2P', monospace",
-                fontSize: '0.6rem',
-                padding: '12px 24px',
-                border: '3px solid #2d7a2d',
-                boxShadow: '4px 4px 0px #2d7a2d',
-                cursor: loading ? 'wait' : 'pointer',
-                transition: 'transform 0.1s, box-shadow 0.1s',
                 flex: 1,
+                background: loading ? 'rgba(239,68,68,0.45)' : 'rgba(239,68,68,0.85)',
+                color: 'white',
+                fontFamily: "'Exo 2', sans-serif",
+                fontWeight: 700,
+                fontSize: '0.82rem',
+                padding: '11px 24px',
+                border: '1px solid rgba(239,68,68,0.4)',
+                borderRadius: '8px',
+                cursor: loading ? 'wait' : 'pointer',
+                letterSpacing: '0.08em',
+                transition: 'background 0.2s',
               }}
-              onMouseEnter={(e) => {
-                if (!loading) {
-                  e.currentTarget.style.transform = 'translate(-2px, -2px)';
-                  e.currentTarget.style.boxShadow = '6px 6px 0px #2d7a2d';
-                }
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.transform = '';
-                e.currentTarget.style.boxShadow = '4px 4px 0px #2d7a2d';
-              }}
+              onMouseEnter={e => { if (!loading) e.currentTarget.style.background = 'rgba(239,68,68,1)'; }}
+              onMouseLeave={e => { if (!loading) e.currentTarget.style.background = 'rgba(239,68,68,0.85)'; }}
             >
               {loading ? 'SUBMITTING...' : 'SUBMIT TIP'}
             </button>
@@ -267,18 +259,14 @@ export default function Submit() {
 
       {/* Preview */}
       {showPreview && (
-        <div style={{ marginTop: '32px' }}>
-          <h2
-            style={{
-              fontFamily: "'Press Start 2P', monospace",
-              fontSize: '0.7rem',
-              color: '#FFD700',
-              marginBottom: '16px',
-              textAlign: 'center',
-            }}
-          >
-            PREVIEW
-          </h2>
+        <div style={{ marginTop: '28px' }}>
+          <p style={{
+            fontFamily: "'VT323', monospace",
+            fontSize: '0.8rem',
+            color: 'rgba(255,255,255,0.25)',
+            letterSpacing: '0.18em',
+            marginBottom: '14px',
+          }}>// PREVIEW</p>
           <TipCard tip={previewTip} />
         </div>
       )}
