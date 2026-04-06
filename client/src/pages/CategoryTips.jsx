@@ -46,7 +46,7 @@ const CATEGORY_CONFIG = {
   },
   Survival: {
     color: '#f97316',
-    icon: '🧭',
+    icon: <img src="https://minecraft.wiki/images/Compass_JE3_BE3.gif" alt="Survival" style={{ width: '28px', height: '28px', imageRendering: 'pixelated' }} />,
     desc: 'Exploration & Strategy',
     blurb: 'Explore and survive. Navigation, resource gathering, and base setup strategies.',
     bgImage: '/cat-survival.webp',

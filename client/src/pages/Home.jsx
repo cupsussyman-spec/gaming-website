@@ -55,7 +55,7 @@ const CATEGORIES = [
   {
     name: 'Survival',
     color: '#f97316',
-    icon: '🧭',
+    icon: <img src="https://minecraft.wiki/images/Compass_JE3_BE3.gif" alt="Survival" style={{ width: '24px', height: '24px', imageRendering: 'pixelated' }} />,
     desc: 'Exploration & Strategy',
     blurb: 'Survive and thrive in any biome. Essential knowledge for every adventurer.',
     bgImage: '/cat-survival.webp',
