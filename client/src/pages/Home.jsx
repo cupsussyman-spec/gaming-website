@@ -253,6 +253,7 @@ export default function Home() {
                     ? `0 4px 24px ${cat.color}30, inset 0 1px 0 rgba(255,255,255,0.12)`
                     : 'inset 0 1px 0 rgba(255,255,255,0.07)',
                 }}
+                onClick={() => navigate(`/tips/${cat.name}`)}
                 onMouseEnter={() => setExpanded(cat.name)}
                 onMouseLeave={() => setExpanded('')}
               >
