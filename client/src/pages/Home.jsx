@@ -31,7 +31,7 @@ const CATEGORIES = [
   {
     name: 'Building',
     color: '#22c55e',
-    icon: '🏗',
+    icon: <img src="https://minecraft.wiki/images/Grass_Block_JE7_BE6.png" alt="Building" style={{ width: '24px', height: '24px', imageRendering: 'pixelated' }} />,
     desc: 'Architecture & Design',
     blurb: 'Transform blocks into breathtaking structures. From cottages to cathedrals.',
     bgImage: '/cat-building.webp',

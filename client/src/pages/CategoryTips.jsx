@@ -30,7 +30,7 @@ const CATEGORY_CONFIG = {
   },
   Building: {
     color: '#22c55e',
-    icon: '🏗',
+    icon: <img src="https://minecraft.wiki/images/Grass_Block_JE7_BE6.png" alt="Building" style={{ width: '28px', height: '28px', imageRendering: 'pixelated' }} />,
     desc: 'Architecture & Design',
     blurb: 'Create stunning structures. Architecture tips, building techniques, and design inspiration.',
     bgImage: '/cat-building.webp',
