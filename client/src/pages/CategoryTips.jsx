@@ -25,7 +25,7 @@ const CATEGORY_CONFIG = {
     icon: '⚔',
     desc: 'PvP & PvE Tactics',
     blurb: 'Dominate every encounter. PvP strategies, mob tactics, and gear optimization.',
-    bgImage: '/cat-combat.png',
+    bgImage: '/cat-combat.webp',
     overlay: 'rgba(4,2,12,0.60)',
   },
   Building: {
@@ -33,7 +33,7 @@ const CATEGORY_CONFIG = {
     icon: '🏗',
     desc: 'Architecture & Design',
     blurb: 'Create stunning structures. Architecture tips, building techniques, and design inspiration.',
-    bgImage: '/cat-building.png',
+    bgImage: '/cat-building.webp',
     overlay: 'rgba(4,8,12,0.60)',
   },
   Farming: {
@@ -41,7 +41,7 @@ const CATEGORY_CONFIG = {
     icon: '🌾',
     desc: 'Automation & Resources',
     blurb: 'Automate your resources. Efficient farms, crop mechanics, and mob grinding setups.',
-    bgImage: '/cat-farming.png',
+    bgImage: '/cat-farming.webp',
     overlay: 'rgba(4,8,2,0.60)',
   },
   Survival: {
@@ -49,7 +49,7 @@ const CATEGORY_CONFIG = {
     icon: '🧭',
     desc: 'Exploration & Strategy',
     blurb: 'Explore and survive. Navigation, resource gathering, and base setup strategies.',
-    bgImage: '/cat-survival.png',
+    bgImage: '/cat-survival.webp',
     overlay: 'rgba(10,4,2,0.60)',
   },
 };
