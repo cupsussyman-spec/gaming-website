@@ -8,12 +8,30 @@ html {
 }
 
 body {
-  background-color: #07050a;
+  background-color: #060d0a;
   background-image:
+    /* Top warm sunset/fire glow — matches navbar */
     radial-gradient(ellipse 180% 25% at 60% 0%,
-      rgba(80, 22, 6, 0.7) 0%,
+      rgba(80, 22, 6, 0.75) 0%,
       rgba(30, 10, 3, 0.4) 35%,
-      transparent 65%);
+      transparent 65%),
+    /* Left-side volumetric green forest light */
+    radial-gradient(ellipse 60% 50% at 0% 55%,
+      rgba(18, 60, 22, 0.55) 0%,
+      transparent 70%),
+    /* Right-side deep teal atmospheric haze */
+    radial-gradient(ellipse 55% 45% at 100% 65%,
+      rgba(8, 45, 40, 0.5) 0%,
+      transparent 70%),
+    /* Center-bottom deep underground blue-green */
+    radial-gradient(ellipse 100% 40% at 50% 100%,
+      rgba(6, 28, 22, 0.8) 0%,
+      rgba(4, 14, 18, 0.6) 50%,
+      transparent 100%),
+    /* Midpage ambient warm amber shaft */
+    radial-gradient(ellipse 40% 30% at 70% 45%,
+      rgba(40, 25, 5, 0.3) 0%,
+      transparent 70%);
   background-attachment: fixed;
   font-family: 'VT323', monospace;
   color: white;

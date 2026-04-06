@@ -25,7 +25,7 @@ const CATEGORY_CONFIG = {
     icon: '⚔',
     desc: 'PvP & PvE Tactics',
     blurb: 'Dominate every encounter. PvP strategies, mob tactics, and gear optimization.',
-    bgImage: '/cat-combat.webp',
+    bgImage: '/cat-combat.png',
     overlay: 'rgba(4,2,12,0.60)',
   },
   Building: {
@@ -33,7 +33,7 @@ const CATEGORY_CONFIG = {
     icon: '🏗',
     desc: 'Architecture & Design',
     blurb: 'Create stunning structures. Architecture tips, building techniques, and design inspiration.',
-    bgImage: '/cat-building.webp',
+    bgImage: '/cat-building.png',
     overlay: 'rgba(4,8,12,0.60)',
   },
   Farming: {
@@ -41,7 +41,7 @@ const CATEGORY_CONFIG = {
     icon: '🌾',
     desc: 'Automation & Resources',
     blurb: 'Automate your resources. Efficient farms, crop mechanics, and mob grinding setups.',
-    bgImage: '/cat-farming.webp',
+    bgImage: '/cat-farming.png',
     overlay: 'rgba(4,8,2,0.60)',
   },
   Survival: {
@@ -49,7 +49,7 @@ const CATEGORY_CONFIG = {
     icon: '🧭',
     desc: 'Exploration & Strategy',
     blurb: 'Explore and survive. Navigation, resource gathering, and base setup strategies.',
-    bgImage: '/cat-survival.webp',
+    bgImage: '/cat-survival.png',
     overlay: 'rgba(10,4,2,0.60)',
   },
 };
@@ -64,6 +64,10 @@ export default function CategoryTips() {
   const [totalPages, setTotalPages] = useState(1);
   const [loading, setLoading] = useState(true);
   const [sort, setSort] = useState('newest');
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'instant' });
+  }, [category]);
 
   useEffect(() => {
     fetchTips();
@@ -102,17 +106,23 @@ export default function CategoryTips() {
         backgroundImage: `url('${cfg.bgImage}')`,
         backgroundSize: 'cover',
         backgroundPosition: 'center 30%',
-        filter: 'blur(6px)',
-        opacity: 0.9,
-        zIndex: -2,
+        zIndex: 0,
         transform: 'scale(1.05)',
       }} />
-      {/* Dim overlay — dark enough to read, light enough to see the bg */}
+      {/* Dim overlay — just enough to keep text readable */}
       <div style={{
         position: 'fixed', inset: 0,
-        background: 'rgba(4,2,10,0.55)',
-        zIndex: -1,
+        background: `linear-gradient(
+          to bottom,
+          rgba(4,2,10,0.35) 0%,
+          rgba(4,2,10,0.55) 50%,
+          rgba(4,2,10,0.72) 100%
+        )`,
+        zIndex: 1,
       }} />
+
+      {/* ── Content above background ─────────────────────── */}
+      <div style={{ position: 'relative', zIndex: 2 }}>
 
       {/* ── Hero header — clear, image shows through ─────── */}
       <div style={{
@@ -334,6 +344,7 @@ export default function CategoryTips() {
         )}
       </div>
       </div>
+      </div> {/* end content wrapper */}
     </div>
   );
 }

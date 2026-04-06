@@ -22,7 +22,7 @@ const CATEGORIES = [
     icon: '⚔',
     desc: 'PvP & PvE Tactics',
     blurb: 'Dominate every encounter. PvP strategies, mob tactics, and gear optimization.',
-    bgImage: '/cat-combat.webp',
+    bgImage: '/cat-combat.png',
     idleOverlay: 'rgba(4,2,12,0.45)',
     hoverOverlay: 'rgba(4,2,12,0.15)',
     colorTint: 'rgba(30,100,110,0.25)',
@@ -34,7 +34,7 @@ const CATEGORIES = [
     icon: '🏗',
     desc: 'Architecture & Design',
     blurb: 'Transform blocks into breathtaking structures. From cottages to cathedrals.',
-    bgImage: '/cat-building.webp',
+    bgImage: '/cat-building.png',
     idleOverlay: 'rgba(4,8,12,0.45)',
     hoverOverlay: 'rgba(4,8,12,0.15)',
     colorTint: 'rgba(10,50,70,0.2)',
@@ -46,7 +46,7 @@ const CATEGORIES = [
     icon: '🌾',
     desc: 'Automation & Resources',
     blurb: 'Build efficient farms for every resource. Automate your way to abundance.',
-    bgImage: '/cat-farming.webp',
+    bgImage: '/cat-farming.png',
     idleOverlay: 'rgba(4,8,2,0.45)',
     hoverOverlay: 'rgba(4,8,2,0.15)',
     colorTint: 'rgba(80,100,5,0.2)',
@@ -58,7 +58,7 @@ const CATEGORIES = [
     icon: '🧭',
     desc: 'Exploration & Strategy',
     blurb: 'Survive and thrive in any biome. Essential knowledge for every adventurer.',
-    bgImage: '/cat-survival.webp',
+    bgImage: '/cat-survival.png',
     idleOverlay: 'rgba(10,4,2,0.45)',
     hoverOverlay: 'rgba(10,4,2,0.15)',
     colorTint: 'rgba(100,30,5,0.2)',
@@ -170,6 +170,7 @@ export default function Home() {
               color: WISDOM_COLORS[i],
               letterSpacing: '0.04em',
               lineHeight: 1,
+              textShadow: `0 0 24px ${WISDOM_COLORS[i]}bb, 0 0 48px ${WISDOM_COLORS[i]}55`,
             }}>{l}</span>
           ))}
         </div>
@@ -241,49 +242,41 @@ export default function Home() {
                 key={cat.name}
                 style={{
                   borderRadius: '12px',
-                  border: isOpen ? `1px solid ${cat.color}70` : '1px solid rgba(255,255,255,0.12)',
+                  border: isOpen ? `1px solid ${cat.color}55` : '1px solid rgba(255,255,255,0.10)',
                   overflow: 'hidden',
-                  transition: 'border-color 0.55s ease, box-shadow 0.55s ease',
+                  transition: 'border-color 0.55s ease, box-shadow 0.55s ease, background 0.55s ease',
                   position: 'relative',
                   cursor: 'pointer',
-                  background: 'rgba(255,255,255,0.06)',
-                  backdropFilter: 'blur(16px)',
-                  WebkitBackdropFilter: 'blur(16px)',
+                  background: isOpen
+                    ? `rgba(255,255,255,0.10)`
+                    : 'rgba(255,255,255,0.05)',
+                  backdropFilter: 'blur(20px)',
+                  WebkitBackdropFilter: 'blur(20px)',
                   boxShadow: isOpen
-                    ? `0 4px 24px ${cat.color}30, inset 0 1px 0 rgba(255,255,255,0.12)`
-                    : 'inset 0 1px 0 rgba(255,255,255,0.07)',
+                    ? `0 8px 32px ${cat.color}25, inset 0 1px 0 rgba(255,255,255,0.18)`
+                    : 'inset 0 1px 0 rgba(255,255,255,0.08)',
                 }}
                 onClick={() => navigate(`/tips/${cat.name}`)}
                 onMouseEnter={() => setExpanded(cat.name)}
                 onMouseLeave={() => setExpanded('')}
               >
-                {/* Background image */}
+                {/* Background image — blurred, low opacity */}
                 <div style={{
                   position: 'absolute',
                   inset: '-6px',
                   backgroundImage: `url('${cat.bgImage}')`,
                   backgroundSize: 'cover',
                   backgroundPosition: 'center',
-                  opacity: isOpen ? 0.95 : 0.85,
-                  filter: `blur(${cat.blur || 4}px)`,
+                  opacity: isOpen ? 0.45 : 0.25,
+                  filter: 'blur(3px)',
                   transition: 'opacity 0.55s ease',
                   pointerEvents: 'none',
                 }} />
 
-                {/* Color tint layer */}
-                {cat.colorTint && (
-                  <div style={{
-                    position: 'absolute', inset: 0,
-                    background: cat.colorTint,
-                    transition: 'opacity 0.55s ease',
-                    pointerEvents: 'none',
-                  }} />
-                )}
-
-                {/* Glass overlay — per-card darkness, lighter on hover */}
+                {/* Glass overlay */}
                 <div style={{
                   position: 'absolute', inset: 0,
-                  background: isOpen ? cat.hoverOverlay : cat.idleOverlay,
+                  background: isOpen ? `rgba(4,2,10,0.30)` : 'rgba(4,2,10,0.45)',
                   transition: 'background 0.55s ease',
                   pointerEvents: 'none',
                 }} />
