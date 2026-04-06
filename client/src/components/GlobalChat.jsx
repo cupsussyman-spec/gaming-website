@@ -19,6 +19,7 @@ export default function GlobalChat() {
   const [input, setInput] = useState('');
   const [sending, setSending] = useState(false);
   const [unread, setUnread] = useState(0);
+  const [error, setError] = useState('');
   const bottomRef = useRef(null);
   const lastCountRef = useRef(0);
 
@@ -56,14 +57,16 @@ export default function GlobalChat() {
   const handleSend = async () => {
     if (!input.trim() || sending) return;
     setSending(true);
+    setError('');
     try {
       const { data: newMsg } = await api.post('/chat', { message: input.trim() });
       setMessages(prev => [...prev, newMsg]);
       lastCountRef.current += 1;
       setInput('');
       setTimeout(() => bottomRef.current?.scrollIntoView({ behavior: 'smooth' }), 50);
-    } catch {
-      // silent fail
+    } catch (err) {
+      setError(err?.response?.data?.error || 'Failed to send. Try again.');
+      setTimeout(() => setError(''), 3000);
     } finally {
       setSending(false);
     }
@@ -193,6 +196,14 @@ export default function GlobalChat() {
             borderTop: '1px solid rgba(255,255,255,0.07)',
             flexShrink: 0,
           }}>
+            {error && (
+              <div style={{
+                fontFamily: "'Exo 2', sans-serif",
+                fontSize: '0.7rem',
+                color: '#ef4444',
+                marginBottom: '6px',
+              }}>{error}</div>
+            )}
             {isAuthenticated ? (
               <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
                 <input

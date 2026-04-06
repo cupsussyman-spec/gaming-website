@@ -63,10 +63,20 @@ JOIN users u ON t.user_id = u.id
 LEFT JOIN votes v ON t.id = v.tip_id
 GROUP BY t.id, u.username;
 
+CREATE TABLE IF NOT EXISTS chat_messages (
+  id BIGSERIAL PRIMARY KEY,
+  user_id BIGINT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+  username TEXT NOT NULL,
+  avatar_url TEXT,
+  message TEXT NOT NULL,
+  created_at TIMESTAMPTZ DEFAULT NOW()
+);
+
 -- Disable RLS so the anon key can read/write from the server
 ALTER TABLE users DISABLE ROW LEVEL SECURITY;
 ALTER TABLE tips DISABLE ROW LEVEL SECURITY;
 ALTER TABLE votes DISABLE ROW LEVEL SECURITY;
+ALTER TABLE chat_messages DISABLE ROW LEVEL SECURITY;
 
 -- Seed data
 DO $$
