@@ -86,8 +86,8 @@ export default function Home() {
       }}>
         {/* Enderman GIF */}
         <img
-          src="https://minecraft.wiki/images/MCD_Enderman_Run.gif"
-          alt="Enderman"
+          src="https://minecraft.wiki/images/Warden_sniffing.gif"
+          alt="Warden"
           style={{
             width: '72px',
             imageRendering: 'pixelated',
