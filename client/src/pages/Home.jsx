@@ -7,7 +7,7 @@ const CATEGORIES = [
   {
     name: 'Redstone',
     color: '#ef4444',
-    icon: '⚡',
+    icon: <img src="https://minecraft.wiki/images/Redstone_Dust_JE2_BE2.png" alt="Redstone" style={{ width: '24px', height: '24px', imageRendering: 'pixelated' }} />,
     desc: 'Circuits & Contraptions',
     blurb: 'Master the art of redstone engineering. From simple doors to complex computing machines.',
     bgImage: '/cat-redstone.webp',
