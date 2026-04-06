@@ -83,6 +83,19 @@ export default function Navbar() {
             onMouseEnter={e => e.currentTarget.style.color = 'white'}
             onMouseLeave={e => e.currentTarget.style.color = 'rgba(255,255,255,0.7)'}
           >SUBMIT TIP</Link>
+          <Link to="/chat" style={{
+            ...linkStyle,
+            color: '#22c55e',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '5px',
+          }}
+            onMouseEnter={e => e.currentTarget.style.color = '#4ade80'}
+            onMouseLeave={e => e.currentTarget.style.color = '#22c55e'}
+          >
+            <span style={{ width: '7px', height: '7px', borderRadius: '50%', background: '#22c55e', boxShadow: '0 0 5px #22c55e', display: 'inline-block' }} />
+            CHAT
+          </Link>
         </div>
 
         {/* Desktop auth */}

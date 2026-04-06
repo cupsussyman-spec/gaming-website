@@ -10,6 +10,7 @@ import Submit from './pages/Submit';
 import Profile from './pages/Profile';
 import NotFound from './pages/NotFound';
 import AuthCallback from './pages/AuthCallback';
+import Chat from './pages/Chat';
 
 function ProtectedRoute({ children }) {
   const { isAuthenticated } = useAuth();
@@ -35,6 +36,7 @@ function AppRoutes() {
           }
         />
         <Route path="/profile/:username" element={<Profile />} />
+        <Route path="/chat" element={<Chat />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
       <BottomNav />
