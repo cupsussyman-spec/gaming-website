@@ -45,7 +45,15 @@ export default function Chat() {
     socket.on('online_count', setOnlineCount);
     socket.on('online_users', setOnlineUsers);
 
-    return () => socket.disconnect();
+    // Refresh message history every 20 minutes
+    const refreshInterval = setInterval(() => {
+      socket.emit('request_history');
+    }, 20 * 60 * 1000);
+
+    return () => {
+      clearInterval(refreshInterval);
+      socket.disconnect();
+    };
   }, [user]);
 
   const handleSend = () => {

@@ -52,9 +52,13 @@ io.on('connection', (socket) => {
     io.emit('online_users', [...onlineUsers.values()].map(u => u.username));
   });
 
-  // Send recent messages to new connection
+  // Send recent messages to new connection or on refresh request
   socket.emit('message_history', recentMessages);
   socket.emit('online_count', onlineUsers.size);
+
+  socket.on('request_history', () => {
+    socket.emit('message_history', recentMessages);
+  });
 });
 
 // Middleware
