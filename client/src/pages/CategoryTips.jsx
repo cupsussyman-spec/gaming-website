@@ -38,7 +38,7 @@ const CATEGORY_CONFIG = {
   },
   Farming: {
     color: '#84cc16',
-    icon: '🌾',
+    icon: <img src="https://minecraft.wiki/images/Villagerpickingup.gif" alt="Farming" style={{ width: '28px', height: '28px', imageRendering: 'pixelated' }} />,
     desc: 'Automation & Resources',
     blurb: 'Automate your resources. Efficient farms, crop mechanics, and mob grinding setups.',
     bgImage: '/cat-farming.webp',

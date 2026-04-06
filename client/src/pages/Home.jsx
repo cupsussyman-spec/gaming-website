@@ -43,7 +43,7 @@ const CATEGORIES = [
   {
     name: 'Farming',
     color: '#84cc16',
-    icon: '🌾',
+    icon: <img src="https://minecraft.wiki/images/Villagerpickingup.gif" alt="Farming" style={{ width: '24px', height: '24px', imageRendering: 'pixelated' }} />,
     desc: 'Automation & Resources',
     blurb: 'Build efficient farms for every resource. Automate your way to abundance.',
     bgImage: '/cat-farming.webp',
