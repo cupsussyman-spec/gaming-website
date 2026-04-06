@@ -7,7 +7,6 @@ const authRoutes = require('./routes/auth');
 const tipsRoutes = require('./routes/tips');
 const usersRoutes = require('./routes/users');
 const votesRoutes = require('./routes/votes');
-const chatRoutes = require('./routes/chat');
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -39,7 +38,6 @@ app.use('/api/auth', authRoutes);
 app.use('/api/tips', tipsRoutes);
 app.use('/api/tips', votesRoutes);
 app.use('/api/users', usersRoutes);
-app.use('/api/chat', chatRoutes);
 
 // Health check
 app.get('/api/health', (req, res) => {

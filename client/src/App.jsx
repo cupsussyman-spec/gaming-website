@@ -10,7 +10,6 @@ import Submit from './pages/Submit';
 import Profile from './pages/Profile';
 import NotFound from './pages/NotFound';
 import AuthCallback from './pages/AuthCallback';
-import GlobalChat from './components/GlobalChat';
 
 function ProtectedRoute({ children }) {
   const { isAuthenticated } = useAuth();
@@ -39,7 +38,6 @@ function AppRoutes() {
         <Route path="*" element={<NotFound />} />
       </Routes>
       <BottomNav />
-      <GlobalChat />
     </div>
   );
 }
