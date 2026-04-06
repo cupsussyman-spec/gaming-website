@@ -73,7 +73,23 @@ export default function Chat() {
   };
 
   return (
+    <div style={{ minHeight: '100vh', position: 'relative' }}>
+      {/* Background */}
+      <div style={{
+        position: 'fixed', inset: 0,
+        backgroundImage: "url('/chat-bg.webp')",
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        zIndex: 0,
+      }} />
+      <div style={{
+        position: 'fixed', inset: 0,
+        background: 'linear-gradient(to bottom, rgba(2,4,14,0.55) 0%, rgba(2,4,14,0.45) 50%, rgba(2,4,14,0.65) 100%)',
+        zIndex: 1,
+      }} />
+
     <div style={{
+      position: 'relative', zIndex: 2,
       minHeight: '100vh',
       display: 'flex',
       flexDirection: 'column',
@@ -316,6 +332,7 @@ export default function Chat() {
           }}
         >SEND</button>
       </div>
+    </div>
     </div>
   );
 }
