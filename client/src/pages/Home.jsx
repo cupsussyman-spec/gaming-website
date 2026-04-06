@@ -91,14 +91,14 @@ export default function Home() {
           style={{
             width: '72px',
             imageRendering: 'pixelated',
-            filter: 'drop-shadow(0 0 8px rgba(139, 92, 246, 0.7))',
+            filter: 'drop-shadow(0 0 8px rgba(0, 180, 160, 0.8))',
           }}
         />
 
         {/* Discord card */}
         <div style={{
-          background: 'rgba(88, 28, 135, 0.18)',
-          border: '1px solid rgba(139, 92, 246, 0.4)',
+          background: 'rgba(0, 60, 70, 0.35)',
+          border: '1px solid rgba(0, 180, 180, 0.4)',
           borderRadius: '10px',
           backdropFilter: 'blur(14px)',
           WebkitBackdropFilter: 'blur(14px)',
@@ -107,14 +107,14 @@ export default function Home() {
           flexDirection: 'column',
           alignItems: 'center',
           gap: '8px',
-          boxShadow: '0 0 18px rgba(139,92,246,0.2), inset 0 1px 0 rgba(255,255,255,0.08)',
+          boxShadow: '0 0 18px rgba(0,180,160,0.2), inset 0 1px 0 rgba(255,255,255,0.08)',
           width: '120px',
         }}>
           <span style={{
             fontFamily: "'Exo 2', sans-serif",
             fontSize: '0.6rem',
             fontWeight: 700,
-            color: 'rgba(196, 148, 255, 0.85)',
+            color: 'rgba(100, 220, 210, 0.9)',
             letterSpacing: '0.08em',
             textAlign: 'center',
             lineHeight: 1.4,
@@ -128,8 +128,8 @@ export default function Home() {
               display: 'flex',
               alignItems: 'center',
               gap: '5px',
-              background: 'rgba(88, 28, 135, 0.5)',
-              border: '1px solid rgba(139, 92, 246, 0.6)',
+              background: 'rgba(0, 100, 100, 0.5)',
+              border: '1px solid rgba(0, 180, 160, 0.6)',
               borderRadius: '6px',
               padding: '5px 10px',
               color: 'white',
@@ -139,16 +139,16 @@ export default function Home() {
               letterSpacing: '0.05em',
               textDecoration: 'none',
               transition: 'background 0.2s, box-shadow 0.2s',
-              boxShadow: '0 0 10px rgba(139,92,246,0.3)',
+              boxShadow: '0 0 10px rgba(0,180,160,0.3)',
               whiteSpace: 'nowrap',
             }}
             onMouseEnter={e => {
-              e.currentTarget.style.background = 'rgba(88, 28, 135, 0.8)';
-              e.currentTarget.style.boxShadow = '0 0 16px rgba(139,92,246,0.6)';
+              e.currentTarget.style.background = 'rgba(0, 120, 120, 0.8)';
+              e.currentTarget.style.boxShadow = '0 0 16px rgba(0,180,160,0.6)';
             }}
             onMouseLeave={e => {
-              e.currentTarget.style.background = 'rgba(88, 28, 135, 0.5)';
-              e.currentTarget.style.boxShadow = '0 0 10px rgba(139,92,246,0.3)';
+              e.currentTarget.style.background = 'rgba(0, 100, 100, 0.5)';
+              e.currentTarget.style.boxShadow = '0 0 10px rgba(0,180,160,0.3)';
             }}
           >
             <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
