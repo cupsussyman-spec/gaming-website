@@ -76,8 +76,8 @@ export default function Home() {
       {/* ── Enderman + Discord widget (top-left) ─────────── */}
       <div style={{
         position: 'fixed',
-        top: '72px',
-        left: '16px',
+        bottom: '20px',
+        right: '16px',
         zIndex: 50,
         display: 'flex',
         flexDirection: 'column',
