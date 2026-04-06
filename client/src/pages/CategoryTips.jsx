@@ -107,10 +107,10 @@ export default function CategoryTips() {
         zIndex: -2,
         transform: 'scale(1.05)',
       }} />
-      {/* Light dim so hero text is readable but image shows through */}
+      {/* Dim overlay — dark enough to read, light enough to see the bg */}
       <div style={{
         position: 'fixed', inset: 0,
-        background: 'rgba(0,0,0,0.30)',
+        background: 'rgba(4,2,10,0.55)',
         zIndex: -1,
       }} />
 
@@ -193,12 +193,12 @@ export default function CategoryTips() {
         </div>
       </div>
 
-      {/* ── Tips — glass panel ───────────────────────────── */}
+      {/* ── Tips section ────────────────────────────────── */}
       <div style={{
-        background: 'rgba(8,6,16,0.72)',
-        backdropFilter: 'blur(20px)',
-        WebkitBackdropFilter: 'blur(20px)',
-        borderTop: `1px solid rgba(255,255,255,0.08)`,
+        background: 'rgba(4,2,10,0.45)',
+        backdropFilter: 'blur(2px)',
+        WebkitBackdropFilter: 'blur(2px)',
+        borderTop: `1px solid rgba(255,255,255,0.07)`,
         paddingTop: '32px',
         paddingBottom: '80px',
         minHeight: '50vh',
