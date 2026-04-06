@@ -22,7 +22,7 @@ const CATEGORY_CONFIG = {
   },
   Combat: {
     color: '#8b5cf6',
-    icon: '⚔',
+    icon: <img src="https://minecraft.wiki/images/Enchanted_Diamond_Sword.gif" alt="Combat" style={{ width: '28px', height: '28px', imageRendering: 'pixelated' }} />,
     desc: 'PvP & PvE Tactics',
     blurb: 'Dominate every encounter. PvP strategies, mob tactics, and gear optimization.',
     bgImage: '/cat-combat.webp',
