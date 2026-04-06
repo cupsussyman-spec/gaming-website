@@ -88,6 +88,21 @@ export default function Chat() {
         zIndex: 1,
       }} />
 
+    {/* Totem GIF — top left */}
+    <img
+      src="https://minecraft.wiki/images/Totem_of_Undying_Bedrock_Animation.gif"
+      alt="Totem of Undying"
+      style={{
+        position: 'fixed',
+        top: '70px',
+        left: '16px',
+        width: '60px',
+        imageRendering: 'pixelated',
+        filter: 'drop-shadow(0 0 8px rgba(251,191,36,0.7))',
+        zIndex: 10,
+      }}
+    />
+
     <div style={{
       position: 'relative', zIndex: 2,
       minHeight: '100vh',
