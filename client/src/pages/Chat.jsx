@@ -2,7 +2,9 @@ import { useState, useEffect, useRef } from 'react';
 import { io } from 'socket.io-client';
 import { useAuth } from '../context/AuthContext';
 
-const SOCKET_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001';
+const SOCKET_URL = import.meta.env.VITE_API_URL
+  ? import.meta.env.VITE_API_URL.replace('/api', '')
+  : window.location.origin;
 
 function timeAgo(dateStr) {
   const diff = Math.floor((Date.now() - new Date(dateStr)) / 1000);
