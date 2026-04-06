@@ -107,21 +107,21 @@ export default function Chat() {
         gap: '10px',
       }}>
         <div>
+          <p style={{
+            fontFamily: "'VT323', monospace",
+            fontSize: '0.78rem',
+            color: 'rgba(255,255,255,0.3)',
+            margin: '0 0 4px',
+            letterSpacing: '0.18em',
+          }}>// LIVE · ALL PLAYERS</p>
           <h1 style={{
             fontFamily: "'Exo 2', sans-serif",
             fontWeight: 800,
-            fontSize: 'clamp(1.4rem, 4vw, 2rem)',
+            fontSize: 'clamp(1rem, 3vw, 1.35rem)',
             color: 'white',
             margin: 0,
-            letterSpacing: '0.05em',
-          }}>GLOBAL CHAT</h1>
-          <p style={{
-            fontFamily: "'VT323', monospace",
-            fontSize: '1rem',
-            color: 'rgba(255,255,255,0.35)',
-            margin: '2px 0 0',
-            letterSpacing: '0.08em',
-          }}>// REAL-TIME · ALL PLAYERS</p>
+            letterSpacing: '0.06em',
+          }}>TALK TO PLAYERS IN THIS CHAT</h1>
         </div>
 
         {/* Online count badge */}
@@ -198,8 +198,8 @@ export default function Chat() {
       {/* Messages */}
       <div style={{
         flex: 1,
-        background: 'rgba(255,255,255,0.03)',
-        border: '1px solid rgba(255,255,255,0.08)',
+        background: 'rgba(255,255,255,0.12)',
+        border: '1px solid rgba(255,255,255,0.22)',
         borderRadius: '14px',
         padding: '16px',
         overflowY: 'auto',
@@ -208,7 +208,9 @@ export default function Chat() {
         display: 'flex',
         flexDirection: 'column',
         gap: '12px',
-        backdropFilter: 'blur(12px)',
+        backdropFilter: 'blur(24px)',
+        WebkitBackdropFilter: 'blur(24px)',
+        boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.25), 0 4px 32px rgba(0,0,0,0.3)',
         marginBottom: '14px',
       }}>
         {messages.length === 0 && (
@@ -279,14 +281,16 @@ export default function Chat() {
 
       {/* Input */}
       <div style={{
-        background: 'rgba(255,255,255,0.03)',
-        border: '1px solid rgba(255,255,255,0.08)',
+        background: 'rgba(255,255,255,0.12)',
+        border: '1px solid rgba(255,255,255,0.22)',
         borderRadius: '12px',
         padding: '10px 12px',
         display: 'flex',
         gap: '10px',
         alignItems: 'center',
-        backdropFilter: 'blur(12px)',
+        backdropFilter: 'blur(24px)',
+        WebkitBackdropFilter: 'blur(24px)',
+        boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.2)',
       }}>
         {!isAuthenticated && (
           <span style={{
