@@ -18,8 +18,6 @@ export default function Chat() {
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState('');
   const [onlineCount, setOnlineCount] = useState(0);
-  const [onlineUsers, setOnlineUsers] = useState([]);
-  const [showUsers, setShowUsers] = useState(false);
   const socketRef = useRef(null);
   const bottomRef = useRef(null);
 
@@ -43,7 +41,6 @@ export default function Chat() {
     });
 
     socket.on('online_count', setOnlineCount);
-    socket.on('online_users', setOnlineUsers);
 
     // Refresh message history every 20 minutes
     const refreshInterval = setInterval(() => {
@@ -140,22 +137,15 @@ export default function Chat() {
         </div>
 
         {/* Online count badge */}
-        <button
-          onClick={() => setShowUsers(v => !v)}
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: '7px',
-            background: 'rgba(34,197,94,0.1)',
-            border: '1px solid rgba(34,197,94,0.35)',
-            borderRadius: '8px',
-            padding: '7px 14px',
-            cursor: 'pointer',
-            transition: 'background 0.2s',
-          }}
-          onMouseEnter={e => e.currentTarget.style.background = 'rgba(34,197,94,0.18)'}
-          onMouseLeave={e => e.currentTarget.style.background = 'rgba(34,197,94,0.1)'}
-        >
+        <div style={{
+          display: 'flex',
+          alignItems: 'center',
+          gap: '7px',
+          background: 'rgba(34,197,94,0.1)',
+          border: '1px solid rgba(34,197,94,0.35)',
+          borderRadius: '8px',
+          padding: '7px 14px',
+        }}>
           <span style={{
             width: '8px', height: '8px', borderRadius: '50%',
             background: '#22c55e',
@@ -169,46 +159,9 @@ export default function Chat() {
             color: '#22c55e',
             letterSpacing: '0.05em',
           }}>{onlineCount} ONLINE</span>
-          <span style={{ color: 'rgba(255,255,255,0.3)', fontSize: '0.7rem' }}>▾</span>
-        </button>
+        </div>
       </div>
 
-      {/* Online users dropdown */}
-      {showUsers && onlineUsers.length > 0 && (
-        <div style={{
-          background: 'rgba(10,7,14,0.9)',
-          border: '1px solid rgba(34,197,94,0.2)',
-          borderRadius: '10px',
-          padding: '12px 16px',
-          marginBottom: '16px',
-          backdropFilter: 'blur(12px)',
-        }}>
-          <p style={{
-            fontFamily: "'Exo 2', sans-serif",
-            fontSize: '0.7rem',
-            fontWeight: 700,
-            color: 'rgba(34,197,94,0.7)',
-            letterSpacing: '0.1em',
-            margin: '0 0 8px',
-          }}>ONLINE NOW</p>
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
-            {onlineUsers.map((u, i) => (
-              <span key={i} style={{
-                fontFamily: "'Exo 2', sans-serif",
-                fontSize: '0.75rem',
-                fontWeight: 600,
-                color: 'rgba(255,255,255,0.75)',
-                background: 'rgba(255,255,255,0.06)',
-                border: '1px solid rgba(255,255,255,0.1)',
-                borderRadius: '5px',
-                padding: '3px 8px',
-              }}>
-                <span style={{ color: '#22c55e', marginRight: '4px' }}>●</span>{u}
-              </span>
-            ))}
-          </div>
-        </div>
-      )}
 
       {/* Messages */}
       <div style={{

@@ -8,6 +8,7 @@ import AlertBox from '../components/AlertBox';
 export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [rememberMe, setRememberMe] = useState(false);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const { login } = useAuth();
@@ -23,10 +24,7 @@ export default function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
-    if (!email.trim() || !password) {
-      setError('Please fill in all fields.');
-      return;
-    }
+    if (!email.trim() || !password) { setError('Please fill in all fields.'); return; }
     setLoading(true);
     try {
       const res = await api.post('/auth/login', { email: email.trim(), password });
@@ -39,14 +37,16 @@ export default function Login() {
     }
   };
 
-  const labelStyle = {
-    fontFamily: "'Exo 2', sans-serif",
-    fontWeight: 600,
-    fontSize: '0.7rem',
-    color: 'rgba(255,255,255,0.5)',
-    display: 'block',
-    marginBottom: '8px',
-    letterSpacing: '0.08em',
+  const inputStyle = {
+    width: '100%',
+    padding: '12px 42px 12px 14px',
+    background: 'rgba(255,255,255,0.15)',
+    border: '1px solid rgba(255,255,255,0.25)',
+    borderRadius: '8px',
+    color: 'white',
+    fontSize: '0.9rem',
+    outline: 'none',
+    boxSizing: 'border-box',
   };
 
   return (
@@ -56,102 +56,109 @@ export default function Login() {
       alignItems: 'center',
       justifyContent: 'center',
       padding: '32px 16px 100px',
+      backgroundImage: "url('/login-bg.png')",
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
     }}>
-      <div className="glass-card" style={{
+      <div style={{
         width: '100%',
-        maxWidth: '400px',
-        padding: '36px 32px',
+        maxWidth: '360px',
+        background: 'rgba(30,30,35,0.75)',
+        backdropFilter: 'blur(20px)',
+        WebkitBackdropFilter: 'blur(20px)',
+        border: '1px solid rgba(255,255,255,0.12)',
+        borderRadius: '20px',
+        padding: '36px 28px',
+        boxShadow: '0 25px 60px rgba(0,0,0,0.45)',
       }}>
-        {/* Header */}
-        <div style={{ textAlign: 'center', marginBottom: '28px' }}>
-          <div style={{ fontSize: '2rem', marginBottom: '10px' }}>⛏</div>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '12px', marginBottom: '24px' }}>
+          <img
+            src="https://minecraft.wiki/images/Enchanted_Diamond_Pickaxe.gif"
+            alt="Pickaxe"
+            style={{ width: '56px', height: '56px', imageRendering: 'pixelated', flexShrink: 0 }}
+          />
           <h1 style={{
             fontFamily: "'Exo 2', sans-serif",
             fontWeight: 800,
             fontSize: '1.6rem',
             color: 'white',
             margin: 0,
-            letterSpacing: '0.06em',
-          }}>
-            WELCOME BACK
-          </h1>
-          <p style={{
-            fontFamily: "'VT323', monospace",
-            fontSize: '1.1rem',
-            color: 'rgba(255,255,255,0.4)',
-            marginTop: '6px',
-          }}>
-            Sign in to your account
-          </p>
+            letterSpacing: '0.03em',
+            lineHeight: 1.1,
+          }}>Craft<br />Wisdom</h1>
         </div>
 
-        {error && (
-          <div style={{ marginBottom: '20px' }}>
-            <AlertBox message={error} type="error" />
-          </div>
-        )}
+        {error && <div style={{ marginBottom: '16px' }}><AlertBox message={error} type="error" /></div>}
 
-        <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-          <div>
-            <label htmlFor="email" style={labelStyle}>EMAIL</label>
+        <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
+          <div style={{ position: 'relative' }}>
             <input
-              id="email"
               type="email"
               value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className="pixel-input"
-              placeholder="player@minecraft.net"
+              onChange={e => setEmail(e.target.value)}
+              placeholder="Email"
               autoComplete="email"
               disabled={loading}
+              style={inputStyle}
             />
+            <img src="https://minecraft.wiki/images/End_Crystal_(Slateless).gif" alt="icon" style={{ position: 'absolute', right: '10px', top: '50%', transform: 'translateY(-50%)', width: '22px', height: '22px', imageRendering: 'pixelated', pointerEvents: 'none' }} />
           </div>
 
-          <div>
-            <label htmlFor="password" style={labelStyle}>PASSWORD</label>
+          <div style={{ position: 'relative' }}>
             <input
-              id="password"
               type="password"
               value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className="pixel-input"
-              placeholder="••••••••"
+              onChange={e => setPassword(e.target.value)}
+              placeholder="Password"
               autoComplete="current-password"
               disabled={loading}
+              style={inputStyle}
             />
+            <span style={{ position: 'absolute', right: '13px', top: '50%', transform: 'translateY(-50%)', color: 'rgba(255,255,255,0.55)', fontSize: '1rem', pointerEvents: 'none' }}>🔒</span>
+          </div>
+
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+            <label style={{ display: 'flex', alignItems: 'center', gap: '6px', color: 'rgba(255,255,255,0.8)', fontSize: '0.82rem', cursor: 'pointer' }}>
+              <input
+                type="checkbox"
+                checked={rememberMe}
+                onChange={e => setRememberMe(e.target.checked)}
+                style={{ accentColor: 'white', width: '14px', height: '14px' }}
+              />
+              Remember me
+            </label>
+            <span style={{ color: 'rgba(255,255,255,0.7)', fontSize: '0.82rem', cursor: 'pointer' }}>Forgot password?</span>
           </div>
 
           <button
             type="submit"
             disabled={loading}
             style={{
-              background: loading ? 'rgba(239,68,68,0.5)' : 'rgba(239,68,68,0.85)',
-              color: 'white',
+              width: '100%',
+              padding: '13px',
+              background: 'white',
+              color: '#111',
               fontFamily: "'Exo 2', sans-serif",
               fontWeight: 700,
-              fontSize: '0.85rem',
-              padding: '13px',
-              border: '1px solid rgba(239,68,68,0.4)',
+              fontSize: '0.95rem',
+              border: 'none',
               borderRadius: '8px',
               cursor: loading ? 'wait' : 'pointer',
-              letterSpacing: '0.08em',
               marginTop: '4px',
-              transition: 'background 0.2s',
+              transition: 'opacity 0.2s',
+              opacity: loading ? 0.7 : 1,
             }}
-            onMouseEnter={e => { if (!loading) e.currentTarget.style.background = 'rgba(239,68,68,1)'; }}
-            onMouseLeave={e => { if (!loading) e.currentTarget.style.background = 'rgba(239,68,68,0.85)'; }}
           >
-            {loading ? 'SIGNING IN...' : 'LOGIN'}
+            {loading ? 'Signing in...' : 'Login'}
           </button>
         </form>
 
-        {/* Divider */}
-        <div style={{ display: 'flex', alignItems: 'center', margin: '20px 0', gap: '10px' }}>
-          <div style={{ flex: 1, height: '1px', background: 'rgba(255,255,255,0.08)' }} />
-          <span style={{ fontFamily: "'VT323', monospace", fontSize: '1rem', color: 'rgba(255,255,255,0.25)' }}>OR</span>
-          <div style={{ flex: 1, height: '1px', background: 'rgba(255,255,255,0.08)' }} />
+        <div style={{ display: 'flex', alignItems: 'center', margin: '18px 0', gap: '10px' }}>
+          <div style={{ flex: 1, height: '1px', background: 'rgba(255,255,255,0.2)' }} />
+          <span style={{ color: 'rgba(255,255,255,0.5)', fontSize: '0.8rem' }}>or</span>
+          <div style={{ flex: 1, height: '1px', background: 'rgba(255,255,255,0.2)' }} />
         </div>
 
-        {/* Google login */}
         <button
           onClick={handleGoogleLogin}
           style={{
@@ -160,45 +167,29 @@ export default function Login() {
             alignItems: 'center',
             justifyContent: 'center',
             gap: '10px',
-            background: 'rgba(255,255,255,0.06)',
-            color: 'rgba(255,255,255,0.85)',
+            background: 'rgba(255,255,255,0.12)',
+            color: 'white',
             fontFamily: "'Exo 2', sans-serif",
             fontWeight: 600,
-            fontSize: '0.8rem',
-            padding: '12px',
-            border: '1px solid rgba(255,255,255,0.1)',
+            fontSize: '0.85rem',
+            padding: '11px',
+            border: '1px solid rgba(255,255,255,0.2)',
             borderRadius: '8px',
             cursor: 'pointer',
-            letterSpacing: '0.06em',
             transition: 'background 0.2s',
           }}
-          onMouseEnter={e => e.currentTarget.style.background = 'rgba(255,255,255,0.1)'}
-          onMouseLeave={e => e.currentTarget.style.background = 'rgba(255,255,255,0.06)'}
+          onMouseEnter={e => e.currentTarget.style.background = 'rgba(255,255,255,0.22)'}
+          onMouseLeave={e => e.currentTarget.style.background = 'rgba(255,255,255,0.12)'}
         >
           <img src="https://www.google.com/favicon.ico" alt="Google" style={{ width: '16px', height: '16px' }} />
-          CONTINUE WITH GOOGLE
+          Sign in with Google
         </button>
 
-        <p style={{
-          fontFamily: "'VT323', monospace",
-          fontSize: '1.1rem',
-          color: 'rgba(255,255,255,0.35)',
-          textAlign: 'center',
-          marginTop: '20px',
-        }}>
-          No account?{' '}
-          <Link
-            to="/register"
-            style={{ color: '#f97316', textDecoration: 'none' }}
-            onMouseEnter={e => e.currentTarget.style.color = '#fb923c'}
-            onMouseLeave={e => e.currentTarget.style.color = '#f97316'}
-          >
-            REGISTER HERE
+        <p style={{ textAlign: 'center', color: 'rgba(255,255,255,0.7)', fontSize: '0.85rem', marginTop: '20px', marginBottom: 0 }}>
+          Don't have an account?{' '}
+          <Link to="/register" style={{ color: 'white', fontWeight: 700, textDecoration: 'none' }}>
+            Register
           </Link>
-        </p>
-
-        <p style={{ fontFamily: "'VT323', monospace", fontSize: '0.85rem', color: 'rgba(255,255,255,0.18)', textAlign: 'center', marginTop: '8px' }}>
-          Demo: craftmaster@example.com / password123
         </p>
       </div>
     </div>

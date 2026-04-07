@@ -41,7 +41,7 @@ export default function Navbar() {
       position: 'fixed',
       top: 0, left: 0, right: 0,
       zIndex: 200,
-      background: 'rgba(7, 5, 8, 0.6)',
+      background: 'rgba(7, 5, 8, 0.92)',
       backdropFilter: 'blur(16px)',
       WebkitBackdropFilter: 'blur(16px)',
       borderBottom: '1px solid rgba(255,255,255,0.06)',
@@ -230,25 +230,54 @@ export default function Navbar() {
           )}
         </div>
 
-        {/* Mobile logo area only — navigation is in bottom nav */}
-        <div className="nav-mobile-btn" style={{ alignItems: 'center', gap: '10px' }}>
+        {/* Mobile top bar actions */}
+        <div className="nav-mobile-btn" style={{ alignItems: 'center', gap: '8px' }}>
+          <Link to="/submit" style={{
+            fontFamily: "'Exo 2', sans-serif",
+            fontWeight: 700,
+            fontSize: '0.7rem',
+            color: 'white',
+            textDecoration: 'none',
+            padding: '5px 10px',
+            background: 'rgba(239,68,68,0.75)',
+            borderRadius: '6px',
+            letterSpacing: '0.04em',
+          }}>SUBMIT</Link>
+          <Link to="/chat" style={{
+            fontFamily: "'Exo 2', sans-serif",
+            fontWeight: 700,
+            fontSize: '0.7rem',
+            color: '#22c55e',
+            textDecoration: 'none',
+            padding: '5px 10px',
+            border: '1px solid rgba(34,197,94,0.4)',
+            borderRadius: '6px',
+            letterSpacing: '0.04em',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '4px',
+          }}>
+            <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#22c55e', boxShadow: '0 0 5px #22c55e', display: 'inline-block', flexShrink: 0 }} />
+            CHAT
+          </Link>
           {isAuthenticated ? (
             <Link to={`/profile/${user.username}`} style={{ display: 'flex', alignItems: 'center' }}>
               {user.avatar_url ? (
-                <img src={user.avatar_url} alt="" style={{ width: '30px', height: '30px', borderRadius: '50%', objectFit: 'cover', border: '1px solid rgba(255,255,255,0.2)' }} />
+                <img src={user.avatar_url} alt="" style={{ width: '28px', height: '28px', borderRadius: '50%', objectFit: 'cover', border: '1px solid rgba(255,255,255,0.2)' }} />
               ) : (
-                <div style={{ width: '30px', height: '30px', borderRadius: '50%', background: 'rgba(255,255,255,0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1rem' }}>👤</div>
+                <div style={{ width: '28px', height: '28px', borderRadius: '50%', background: 'rgba(255,255,255,0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.9rem' }}>👤</div>
               )}
             </Link>
           ) : (
             <Link to="/login" style={{
               fontFamily: "'Exo 2', sans-serif",
               fontWeight: 600,
-              fontSize: '0.8rem',
+              fontSize: '0.7rem',
               color: 'white',
               textDecoration: 'none',
-              padding: '6px 14px',
-              background: 'rgba(239,68,68,0.8)',
+              padding: '5px 10px',
+              background: 'rgba(255,255,255,0.1)',
+              border: '1px solid rgba(255,255,255,0.2)',
               borderRadius: '6px',
             }}>LOGIN</Link>
           )}

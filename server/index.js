@@ -95,8 +95,9 @@ app.get('/api/health', (req, res) => {
 });
 
 // Serve React frontend in production
-if (process.env.NODE_ENV === 'production') {
-  const clientDist = path.join(__dirname, '../client/dist');
+const clientDist = path.join(__dirname, '../client/dist');
+const fs = require('fs');
+if (process.env.NODE_ENV === 'production' || fs.existsSync(clientDist)) {
   app.use(express.static(clientDist));
   app.get('/{*path}', (req, res) => {
     res.sendFile(path.join(clientDist, 'index.html'));

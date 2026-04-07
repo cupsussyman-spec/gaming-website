@@ -43,7 +43,7 @@ const CATEGORIES = [
   {
     name: 'Farming',
     color: '#84cc16',
-    icon: <img src="https://minecraft.wiki/images/Villagerpickingup.gif" alt="Farming" style={{ width: '24px', height: '24px', imageRendering: 'pixelated' }} />,
+    icon: <img src="https://minecraft.wiki/images/Seeds_(inventory)_MCE.png" alt="Farming" style={{ width: '24px', height: '24px', imageRendering: 'pixelated' }} />,
     desc: 'Automation & Resources',
     blurb: 'Build efficient farms for every resource. Automate your way to abundance.',
     bgImage: '/cat-farming.webp',
@@ -198,7 +198,7 @@ export default function Home() {
       {/* ── Full-page water background ───────────────────── */}
       <div style={{
         position: 'fixed', inset: 0,
-        backgroundImage: "url('/home-bg.webp')",
+        backgroundImage: "url('/home-bg-space.png')",
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         filter: 'blur(6px) saturate(0.5)',
@@ -236,7 +236,7 @@ export default function Home() {
             rgba(5,3,8,0.85) 85%,
             rgba(5,3,8,1) 100%
           ),
-          url('/hero-bg.webp')
+          url('/hero-bg-final.png')
         `,
         backgroundSize: 'cover',
         backgroundPosition: 'center 40%',
@@ -342,10 +342,30 @@ export default function Home() {
       </section>
 
       {/* ── Category section ─────────────────────────── */}
+      <section style={{ position: 'relative' }}>
+        {/* GIF background layer */}
+        <div style={{
+          position: 'absolute',
+          inset: 0,
+          backgroundImage: "url('/home-bg-space.png')",
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          opacity: 0.35,
+          zIndex: 0,
+        }} />
+        {/* Dark overlay so text stays readable */}
+        <div style={{
+          position: 'absolute',
+          inset: 0,
+          background: 'rgba(3,3,10,0.55)',
+          zIndex: 1,
+        }} />
       <section style={{
         maxWidth: '820px',
         margin: '0 auto',
-        padding: '32px 16px 0',
+        padding: '32px 16px 80px',
+        position: 'relative',
+        zIndex: 2,
       }}>
         <p style={{
           fontFamily: "'VT323', monospace",
@@ -500,6 +520,7 @@ export default function Home() {
             );
           })}
         </div>
+      </section>
       </section>
     </div>
   );

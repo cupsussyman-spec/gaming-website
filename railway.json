@@ -5,6 +5,10 @@
     "buildCommand": "npm run build"
   },
   "deploy": {
-    "startCommand": "npm start"
+    "startCommand": "npm start",
+    "healthcheckPath": "/api/health"
+  },
+  "variables": {
+    "NODE_ENV": "production"
   }
 }

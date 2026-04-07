@@ -1,12 +1,12 @@
 import { useLocation, useNavigate } from 'react-router-dom';
 
 const NAV_ITEMS = [
-  { label: 'HOME',     icon: '⌂',  path: '/',                color: null },
-  { label: 'REDSTONE', icon: '⚡', path: '/tips/Redstone',  color: '#ef4444' },
-  { label: 'COMBAT',   icon: '⚔', path: '/tips/Combat',    color: '#8b5cf6' },
-  { label: 'BUILD',    icon: '⬛', path: '/tips/Building',  color: '#22c55e' },
-  { label: 'FARM',     icon: '🌾', path: '/tips/Farming',   color: '#84cc16' },
-  { label: 'SURVIVE',  icon: '🧭', path: '/tips/Survival',  color: '#f97316' },
+  { label: 'HOME',     icon: '🏠',                                                                                         path: '/',                color: '#fff' },
+  { label: 'REDSTONE', img: 'https://minecraft.wiki/w/Special:FilePath/Redstone_Dust_JE2_BE2.png',                        path: '/tips/Redstone',  color: '#ef4444' },
+  { label: 'COMBAT',   img: 'https://minecraft.wiki/w/Special:FilePath/Enchanted_Diamond_Sword.gif',                      path: '/tips/Combat',    color: '#8b5cf6' },
+  { label: 'BUILD',    img: 'https://minecraft.wiki/w/Special:FilePath/Grass_Block_JE7_BE6.png',                          path: '/tips/Building',  color: '#22c55e' },
+  { label: 'FARM',     img: 'https://minecraft.wiki/w/Special:FilePath/Seeds_(inventory)_MCE.png',                        path: '/tips/Farming',   color: '#84cc16' },
+  { label: 'SURVIVE',  img: 'https://minecraft.wiki/w/Special:FilePath/Compass_JE3_BE3.gif',                              path: '/tips/Survival',  color: '#f97316' },
 ];
 
 export default function BottomNav() {
@@ -54,7 +54,10 @@ export default function BottomNav() {
                 gap: '3px',
               }}
             >
-              <span style={{ fontSize: '1.2rem', lineHeight: 1 }}>{item.icon}</span>
+              {item.img
+                ? <img src={item.img} alt={item.label} style={{ width: '1.5rem', height: '1.5rem', objectFit: 'contain', imageRendering: 'pixelated', opacity: isActive ? 1 : 0.4 }} />
+                : <span style={{ fontSize: '1.2rem', lineHeight: 1 }}>{item.icon}</span>
+              }
               <span style={{
                 fontFamily: "'Exo 2', sans-serif",
                 fontWeight: 700,
